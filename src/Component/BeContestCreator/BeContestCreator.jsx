@@ -1,14 +1,22 @@
 import React from "react";
 import useAuth from "../../hook/useAuth";
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../hook/useAxiosSecure/useAxiosSecure";
 
 const BeContestCreator = () => {
+    const{user}=useAuth()
+    const axiosSecure=useAxiosSecure()
     const {register,handleSubmit,formState:{errors}}=useForm()
     const dataOfForm=(data)=>{
+        data.photoURL=user.photoURL
         console.log(data);
+        axiosSecure.post('/creators',data).then(res=>{
+            console.log(res.data);
+            
+        })
         
     }
-    const {user}=useAuth()
+ 
   return (
     <div className="bg-amber-100 h-[80vh] flex flex-col items-center justify-center">
       <form onSubmit={handleSubmit(dataOfForm)} className="w-[500px] mx-auto  bg-white shadow-2xl p-4 text-center rounded-md pt-5">
