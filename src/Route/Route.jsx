@@ -6,6 +6,7 @@ import Registration from "../Component/Authentication/Registration/Registration"
 import Home from "../Pages/HomeLayout/HomeLayout";
 import LogIn from "../Component/Authentication/LogIn/LogIn";
 import Layout from "../Component/Layout/Layout";
+import BeContestCreator from "../Component/BeContestCreator/BeContestCreator";
 // import LogIn from "../Component/Authentication/LogIn/Login.jsx";
 
 
@@ -19,6 +20,9 @@ export const router = createBrowserRouter([
             index:true,
             Component:Home
          
+        },{
+          path:'/beContestCreator',
+          Component:BeContestCreator
         }
     ]
   },

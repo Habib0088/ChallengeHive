@@ -16,7 +16,7 @@ const NavBar = () => {
 };
 
   return (
-    <nav className="w-full bg-white shadow px-6 py-3 flex items-center justify-between">
+    <nav className="w-full bg-blue-100 shadow px-6 py-3 flex items-center justify-between">
       {/* Left*/}
       <div className="flex items-center space-x-2">
         <img
@@ -37,8 +37,8 @@ const NavBar = () => {
         </li>
         <li>
           <li>
-          <NavLink to='/about' className="hover:text-blue-600">
-            About
+          <NavLink to='/beContestCreator' className="hover:text-blue-600">
+            Be Contest Creator
           </NavLink>
         
         </li>

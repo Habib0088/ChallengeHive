@@ -73,9 +73,10 @@ const Registration = () => {
           axiosSecure
             .post("http://localhost:3000/users", userProfileCreate)
             .then((res) => {
-              // if (res.data.insertedId) {
-              //   console.log("created user ");
-              // }
+              if (res.data.insertedId) {
+                // console.log("created user ");
+                navigator(location.state || "/");
+              }
               console.log(res.data);
               
             })
