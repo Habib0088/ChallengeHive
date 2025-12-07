@@ -66,9 +66,9 @@ const NavBar = () => {
           <a href="#" className="block px-4 py-2 hover:bg-gray-100">
             {user.displayName}
           </a>
-          <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+          <Link to='/dashboard' className="block px-4 py-2 hover:bg-gray-100">
             Dashboard
-          </a>
+          </Link>
           <a onClick={handleLogout} href="#" className="block px-4 py-2 hover:bg-gray-100">
             Logout
             

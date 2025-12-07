@@ -7,8 +7,11 @@ import Home from "../Pages/HomeLayout/HomeLayout";
 import LogIn from "../Component/Authentication/LogIn/LogIn";
 import Layout from "../Component/Layout/Layout";
 import BeContestCreator from "../Component/BeContestCreator/BeContestCreator";
+import DashboardLayout from "../Component/Dashboard/DashboardLayout/DashboardLayout";
+import ApproveCreators from "../Component/Dashboard/ApproveCreators/ApproveCreators";
+import DashboardHome from "../Component/Dashboard/DashboardHome/DashboardHome";
 // import LogIn from "../Component/Authentication/LogIn/Login.jsx";
-
+import PrivateRoute from "./PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -22,7 +25,7 @@ export const router = createBrowserRouter([
          
         },{
           path:'/beContestCreator',
-          Component:BeContestCreator
+         element:<PrivateRoute><BeContestCreator></BeContestCreator></PrivateRoute>
         }
     ]
   },
@@ -38,6 +41,19 @@ export const router = createBrowserRouter([
         // Component:LogIn
         Component:LogIn
 
+      }
+    ]
+  },{
+    path:'/dashboard',
+    Component:DashboardLayout,
+    children:[
+      {
+        index:true,
+        Component:DashboardHome
+      },
+      {
+        path:'/dashboard/approveCreators',
+        Component:ApproveCreators
       }
     ]
   }
