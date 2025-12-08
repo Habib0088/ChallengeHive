@@ -12,6 +12,7 @@ import ApproveCreators from "../Component/Dashboard/ApproveCreators/ApproveCreat
 import DashboardHome from "../Component/Dashboard/DashboardHome/DashboardHome";
 // import LogIn from "../Component/Authentication/LogIn/Login.jsx";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 
 export const router = createBrowserRouter([
@@ -53,7 +54,8 @@ export const router = createBrowserRouter([
       },
       {
         path:'/dashboard/approveCreators',
-        Component:ApproveCreators
+        // Component:ApproveCreators
+        element:<PrivateRoute><AdminRoute><ApproveCreators></ApproveCreators></AdminRoute></PrivateRoute>
       }
     ]
   }

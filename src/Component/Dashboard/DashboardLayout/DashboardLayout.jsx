@@ -4,8 +4,10 @@ import { NavLink, Outlet } from "react-router";
 
 // import useRole from "../../../hook/useRole";
 import { IoAccessibilitySharp } from "react-icons/io5";
+import useRole from "../../../hook/useRole";
 
 const DashboardLayout = () => {
+  const {role}=useRole()
   //   const { role } = useRole();
   return (
     <div className="drawer lg:drawer-open">
@@ -76,7 +78,11 @@ const DashboardLayout = () => {
               </NavLink>
             </li>
             {/* Payment  */}
-            <li>
+            {/* ======================Admin only route */}
+           {
+            role==='admin'&&
+            <>
+             <li>
               <NavLink to="/dashboard/approveCreators">
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -92,6 +98,8 @@ const DashboardLayout = () => {
                 </button>
               </NavLink>
             </li>
+            </>
+           }
           </ul>
         </div>
       </div>

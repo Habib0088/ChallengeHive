@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import AuthContext from "../../Context/AuthContext/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
+  import { ToastContainer, toast } from 'react-toastify';
 
 const LogIn = () => {
+  const notify = () => toast("Logged In!")
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
 
@@ -15,8 +17,11 @@ const LogIn = () => {
   const handleGoogle = () => {
     loginWithGoogle()
       .then((result) => {
+        notify()
+         
         const user = result.user;
         console.log(user);
+
 
         const userProfileCreate = {
           email: user.email,
@@ -56,6 +61,7 @@ const LogIn = () => {
   };
   return (
     <div className="text-center mx-auto">
+      <ToastContainer />
       <form
         onSubmit={handleSubmit(handleLogin)}
         className="card bg-base-100 mx-auto max-w-sm shrink-0 shadow-2xl"
