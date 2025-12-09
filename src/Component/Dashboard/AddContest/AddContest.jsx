@@ -1,9 +1,16 @@
 import axios from "axios";
 import React from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
 
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 
 const AddContest = () => {
+  const [deadline, setDeadline] = useState(null);
+  const axiosSecure=useAxiosSecure()
+
   const {
     register,
     handleSubmit,
@@ -24,9 +31,15 @@ const AddContest = () => {
       //   console.log(res.data.data.url)
       data.photoURL = res.data.data.url;
       data.status = "pending";
+      data.deadline = deadline;
+      axiosSecure.post('/contest',data)
+      .then(res=>{
+        console.log(res.data);
+        
+      })
     });
 
-    console.log(data);
+    // console.log(data);
   };
 
   return (
@@ -40,7 +53,9 @@ const AddContest = () => {
           <fieldset className="fieldset space-y-4">
             {/* Name */}
             <div>
-              <label className="label font-semibold text-md text-black ">Name</label>
+              <label className="label font-semibold text-md text-black ">
+                Name
+              </label>
               <input
                 {...register("name", { required: true })}
                 type="text"
@@ -54,7 +69,9 @@ const AddContest = () => {
 
             {/* Photo */}
             <div>
-              <label className="label font-semibold text-md text-black ">Upload Photo</label>
+              <label className="label font-semibold text-md text-black ">
+                Upload Photo
+              </label>
               <input
                 {...register("photo", { required: true })}
                 type="file"
@@ -68,7 +85,9 @@ const AddContest = () => {
 
             {/* Prize */}
             <div>
-              <label className="label font-semibold text-md text-black ">Prize</label>
+              <label className="label font-semibold text-md text-black ">
+                Prize
+              </label>
               <input
                 {...register("prize", { required: true, valueAsNumber: true })}
                 type="number"
@@ -82,7 +101,9 @@ const AddContest = () => {
 
             {/* Prize-Money */}
             <div>
-              <label className="label font-semibold text-md text-black ">Prize-Money</label>
+              <label className="label font-semibold text-md text-black ">
+                Prize-Money
+              </label>
               <input
                 {...register("prizeMoney", {
                   required: true,
@@ -99,35 +120,25 @@ const AddContest = () => {
               )}
             </div>
 
-            {/* Task Description */}
-            <div>
-              <label className="label font-semibold text-md text-black ">Task Description</label>
-              <input
-                {...register("taskDescription", { required: true })}
-                type="text"
-                className="input w-full"
-                placeholder="Task Description"
-              />
-              {errors.taskDescription && (
-                <p className="text-red-500">
-                  You have not provided Task Description
-                </p>
-              )}
-            </div>
+          
 
-            {/* Task Difficulty */}
+            {/* Programming Contest */}
             <div>
-              <label className="label font-semibold text-md text-black ">Task Difficulty</label>
+              <label className="label font-semibold text-md text-black ">
+                Programming Contest
+              </label>
               <select
                 {...register("contestType", { required: true })}
                 className="input w-full bg-base-100 rounded-box z-1  p-2 shadow-sm"
               >
                 <option value="">Select Type</option>
-                <option className="" value="programmingContest">Programming Contest</option>
-                <option value="uI-UXContest">UI-UX Contest</option>
-                <option value="photographyContest">Photography Contest</option>
-                <option value="drawingContest">Drawing Contest</option>
-                <option value="essayContest">Essay Contest</option>
+                <option className="" value="programmingContest">
+                  Programming Contest
+                </option>
+                <option value="UI-UXContest">UI-UX Contest</option>
+                <option value="Photo_graphy_Contest">Photography Contest</option>
+                <option value="Drawing_Contest">Drawing Contest</option>
+                <option value="Essay_Contest">Essay Contest</option>
               </select>
               {errors.taskDifficulty && (
                 <p className="text-red-500">
@@ -137,7 +148,9 @@ const AddContest = () => {
             </div>
             {/* Description */}
             <div>
-              <label className="label font-semibold text-md text-black ">Description</label>
+              <label className="label font-semibold text-md text-black ">
+                Description
+              </label>
               <textarea
                 {...register("description", { required: true })}
                 className="input w-full h-24 resize-none"
@@ -148,6 +161,20 @@ const AddContest = () => {
                   You have not provided Description
                 </p>
               )}
+            </div>
+            {/* ================Date picker */}
+            <div>
+              <label className="label font-semibold text-md text-black">
+                Deadline
+              </label>
+              <DatePicker
+                selected={deadline}
+                onChange={(date) => setDeadline(date)}
+                showTimeSelect
+                dateFormat="Pp" // date + time format
+                className="input w-full"
+                placeholderText="Select Deadline"
+              />
             </div>
           </fieldset>
 
