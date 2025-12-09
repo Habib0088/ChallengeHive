@@ -6,29 +6,34 @@ import { toast } from "../../Authentication/Registration/Toast/toast";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const { refetch,data: users = [], isLoading } = useQuery({
-    queryKey: ["manageUsers",],
+  const {
+    refetch,
+    data: users = [],
+    isLoading,
+  } = useQuery({
+    queryKey: ["manageUsers"],
     queryFn: async () => {
       const res = await axiosSecure.get("/manageUsers");
       return res.data;
     },
   });
 
-  const handleUpdateRole=(user,status)=>{
-    const userStatus={
-        role:status
-    }
-    console.log(user,status);
-    
-    axiosSecure.patch(`/userRoleUpdate?email=${user.email}`,userStatus)
-    .then(res=>{
+  const handleUpdateRole = (user, status) => {
+    const userStatus = {
+      role: status,
+    };
+    console.log(user, status);
+
+    axiosSecure
+      .patch(`/userRoleUpdate?email=${user.email}`, userStatus)
+      .then((res) => {
         console.log(res.data);
-        if(res.data.acknowledged){
-            toast('Changed The Role Successfully')
-            refetch()
+        if (res.data.acknowledged) {
+          toast("Changed The Role Successfully");
+          refetch();
         }
-    })
-  }
+      });
+  };
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -37,7 +42,9 @@ const ManageUsers = () => {
 
   return (
     <div>
-      <h1>Manage Users {users.length}</h1>
+      <h1 className="font-bold text-2xl">
+        <span className="text-[#0A4031]">Total Users</span> {users.length}
+      </h1>
 
       <div className="overflow-x-auto">
         <table className="table">
@@ -60,7 +67,11 @@ const ManageUsers = () => {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
-                        <img src={user?.photoURL} alt="Avatar" />
+                        <img
+                          referrerPolicy="no-referrer"
+                          src={user?.photoURL}
+                          alt="Avatar"
+                        />
                       </div>
                     </div>
 
@@ -74,7 +85,17 @@ const ManageUsers = () => {
                   <div className="text-sm ">{user.email}</div>
                 </td>
 
-                <td className="font-bold text-md text-black">{user?.role}</td>
+                <td
+                  className={`font-bold text-md capitalize ${
+                    user?.role === "admin"
+                      ? "text-red-500"
+                      : user?.role === "creator"
+                      ? "text-blue-500"
+                      : "text-black"
+                  }`}
+                >
+                  {user?.role}
+                </td>
 
                 <td>
                   <div className="dropdown dropdown-hover">
@@ -83,15 +104,24 @@ const ManageUsers = () => {
                     </div>
                     <ul
                       tabIndex="-1"
-                      className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                      className="dropdown-content menu bg-base-100 rounded-box z-1 w-42 p-2 shadow-sm"
                     >
-                      <li onClick={()=>handleUpdateRole(user,'admin')} className="font-bold">
+                      <li
+                        onClick={() => handleUpdateRole(user, "admin")}
+                        className="font-bold"
+                      >
                         <a>Admin</a>
-                      </li >
-                      <li onClick={()=>handleUpdateRole(user,'creator')} className="font-bold">
+                      </li>
+                      <li
+                        onClick={() => handleUpdateRole(user, "creator")}
+                        className="font-bold"
+                      >
                         <a>Creator</a>
                       </li>
-                      <li onClick={()=>handleUpdateRole(user,'user')} className="font-bold">
+                      <li
+                        onClick={() => handleUpdateRole(user, "user")}
+                        className="font-bold"
+                      >
                         <a>User</a>
                       </li>
                     </ul>

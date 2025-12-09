@@ -78,6 +78,7 @@ const Registration = () => {
             .post("http://localhost:3000/users", userProfileCreate)
             .then((res) => {
               if (res.data.insertedId) {
+                toast("Logged In successfully")
                 // console.log("created user ");
                 navigator(location.state || "/");
               }

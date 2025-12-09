@@ -14,7 +14,8 @@ import DashboardHome from "../Component/Dashboard/DashboardHome/DashboardHome";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import ManageUsers from "../Component/Dashboard/ManageUsers/ManageUsers";
-
+import CreatorRoute from "./CreatorRoute";
+import AddContest from "../Component/Dashboard/AddContest/AddContest";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +61,9 @@ export const router = createBrowserRouter([
       },{
         path:'/dashboard/manageUsers',
         element:<PrivateRoute><AdminRoute><ManageUsers></ManageUsers></AdminRoute></PrivateRoute>
+      },{
+        path:'/dashboard/addContest',
+        element:<PrivateRoute><CreatorRoute><AddContest></AddContest></CreatorRoute></PrivateRoute>
       }
     ]
   }

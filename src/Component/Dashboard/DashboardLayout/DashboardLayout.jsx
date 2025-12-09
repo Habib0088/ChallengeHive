@@ -2,6 +2,7 @@ import React from "react";
 
 import { NavLink, Outlet } from "react-router";
 import { FaUsers } from "react-icons/fa";
+import { TbFlagPlus } from "react-icons/tb";
 
 
 // import useRole from "../../../hook/useRole";
@@ -120,6 +121,29 @@ const DashboardLayout = () => {
             </li>
             </>
            }
+           {/* =============Creator only route */}
+           {role==='creator' &&
+           <>
+            <li>
+              <NavLink to="/dashboard/addContest">
+                <button 
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Add Contest"
+                >
+                  {/* Payment icon */}
+                  {/* <FaRegCreditCard /> */}
+                  {/* <IoAccessibilitySharp /> */}
+                  <TbFlagPlus />
+
+
+
+                  <span className="is-drawer-close:hidden">
+                    Add Contest
+                  </span>
+                </button>
+              </NavLink>
+            </li>
+           </>}
           </ul>
         </div>
       </div>

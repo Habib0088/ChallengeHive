@@ -8,7 +8,7 @@ const Restriction = () => {
       {/* <DotLottieReact src={animation} loop autoplay /> */}
 
       <h1 className="text-5xl font-bold text-red-600 absolute">
-        You are not Admin
+        You are Unauthorize
       </h1>
     </div>
   );

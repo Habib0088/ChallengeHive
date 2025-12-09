@@ -5,11 +5,14 @@ import useRole from "../hook/useRole";
 // import Restriction from "../Component/Restriction/Restriction";
 
 const CreatorRoute = ({ children }) => {
-  const { role } = useRole();
+  const {role} = useRole(); 
+  console.log(role);
+  
   if (role !== "creator") {
-    return <Restriction></Restriction>
+    return <Restriction />;
   }
   return children;
 };
+
 
 export default CreatorRoute;
