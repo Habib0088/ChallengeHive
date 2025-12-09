@@ -1,0 +1,109 @@
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
+import Loading from "../../Loading/Loading";
+import { toast } from "../../Authentication/Registration/Toast/toast";
+
+const ManageUsers = () => {
+  const axiosSecure = useAxiosSecure();
+  const { refetch,data: users = [], isLoading } = useQuery({
+    queryKey: ["manageUsers",],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/manageUsers");
+      return res.data;
+    },
+  });
+
+  const handleUpdateRole=(user,status)=>{
+    const userStatus={
+        role:status
+    }
+    console.log(user,status);
+    
+    axiosSecure.patch(`/userRoleUpdate?email=${user.email}`,userStatus)
+    .then(res=>{
+        console.log(res.data);
+        if(res.data.acknowledged){
+            toast('Changed The Role Successfully')
+            refetch()
+        }
+    })
+  }
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  console.log(users);
+
+  return (
+    <div>
+      <h1>Manage Users {users.length}</h1>
+
+      <div className="overflow-x-auto">
+        <table className="table">
+          <thead>
+            <tr>
+              <td>#</td>
+              <th>Name</th>
+              <th>Job</th>
+              <th>Role</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          {users.map((user, i) => (
+            <tbody key={i}>
+              <tr>
+                <td>{i + 1}</td>
+
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle h-12 w-12">
+                        <img src={user?.photoURL} alt="Avatar" />
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="font-bold">{user.displayName}</div>
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <div className="text-sm ">{user.email}</div>
+                </td>
+
+                <td className="font-bold text-md text-black">{user?.role}</td>
+
+                <td>
+                  <div className="dropdown dropdown-hover">
+                    <div tabIndex={0} role="button" className="btn m-1">
+                      Change Role
+                    </div>
+                    <ul
+                      tabIndex="-1"
+                      className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                    >
+                      <li onClick={()=>handleUpdateRole(user,'admin')} className="font-bold">
+                        <a>Admin</a>
+                      </li >
+                      <li onClick={()=>handleUpdateRole(user,'creator')} className="font-bold">
+                        <a>Creator</a>
+                      </li>
+                      <li onClick={()=>handleUpdateRole(user,'user')} className="font-bold">
+                        <a>User</a>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          ))}
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default ManageUsers;

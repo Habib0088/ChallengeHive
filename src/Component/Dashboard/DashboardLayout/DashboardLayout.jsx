@@ -1,6 +1,8 @@
 import React from "react";
 
 import { NavLink, Outlet } from "react-router";
+import { FaUsers } from "react-icons/fa";
+
 
 // import useRole from "../../../hook/useRole";
 import { IoAccessibilitySharp } from "react-icons/io5";
@@ -94,6 +96,24 @@ const DashboardLayout = () => {
 
                   <span className="is-drawer-close:hidden">
                     Approve Creators
+                  </span>
+                </button>
+              </NavLink>
+            </li>
+             <li>
+              <NavLink to="/dashboard/manageUsers">
+                <button 
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Manage Users"
+                >
+                  {/* Payment icon */}
+                  {/* <FaRegCreditCard /> */}
+                  {/* <IoAccessibilitySharp /> */}
+                  <FaUsers />
+
+
+                  <span className="is-drawer-close:hidden">
+                    Manage Users
                   </span>
                 </button>
               </NavLink>

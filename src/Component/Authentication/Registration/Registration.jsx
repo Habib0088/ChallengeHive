@@ -4,10 +4,12 @@ import { Link, useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 import { useState } from "react";
+import Loading from "../../Loading/Loading";
+import { toast } from "./Toast/toast";
 
 const Registration = () => {
   const [show, setShow] = useState(false);
-  const { createUser, loginWithGoogle, updateUserProfile } = useAuth();
+  const { createUser, loginWithGoogle, updateUserProfile,loading } = useAuth();
   const location = useLocation();
 
   const axiosSecure = useAxiosSecure();
@@ -18,6 +20,8 @@ const Registration = () => {
   const handleloginWithGoogle = () => {
     loginWithGoogle()
       .then((result) => {
+       toast("Logged in", "success");
+
         const user = result.user;
         console.log(user);
 
@@ -101,6 +105,9 @@ const Registration = () => {
         console.log(err.message);
       });
   };
+  if(loading){
+    return <Loading></Loading>
+  }
   return (
     <div className="w11/12 mx-auto text-center">
      

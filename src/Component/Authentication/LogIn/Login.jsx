@@ -3,21 +3,25 @@ import { useForm } from "react-hook-form";
 import AuthContext from "../../Context/AuthContext/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
-  import { ToastContainer, toast } from 'react-toastify';
-
+  import { ToastContainer } from 'react-toastify';
+import Loading from "../../Loading/Loading";
+import { toast } from "../Registration/Toast/toast";
 const LogIn = () => {
-  const notify = () => toast("Logged In!")
+  
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
 
   const navigator = useNavigate();
 
-  const { loginUeser, loginWithGoogle } = use(AuthContext);
+  const { loginUeser, loginWithGoogle,loading } = use(AuthContext);
 
   const handleGoogle = () => {
     loginWithGoogle()
       .then((result) => {
-        notify()
+        // toast("Logged in", "success");
+        toast("Logged in", "success");
+
+
          
         const user = result.user;
         console.log(user);
@@ -51,6 +55,8 @@ const LogIn = () => {
     console.log(data);
     loginUeser(data.email, data.password)
       .then((result) => {
+        toast("Logged in", "success");
+
         const loggedUser = result.user;
         console.log(loggedUser);
         navigator(location.state || "/");
@@ -59,6 +65,9 @@ const LogIn = () => {
         console.log(error.message);
       });
   };
+  if(loading){
+   return <Loading></Loading>
+  }
   return (
     <div className="text-center mx-auto">
       <ToastContainer />
