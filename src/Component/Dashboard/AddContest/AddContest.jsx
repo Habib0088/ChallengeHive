@@ -6,14 +6,18 @@ import { useState } from "react";
 
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
+import { toast } from "../../Authentication/Registration/Toast/toast";
+import useAuth from "../../../hook/useAuth";
 
 const AddContest = () => {
   const [deadline, setDeadline] = useState(null);
   const axiosSecure=useAxiosSecure()
+  const {user}=useAuth()
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -32,11 +36,20 @@ const AddContest = () => {
       data.photoURL = res.data.data.url;
       data.status = "pending";
       data.deadline = deadline;
+      data.contestCreator=user.displayName;
+      data.email=user.email,
+      data.creatorPhoto=user.photoURL
+
       axiosSecure.post('/contest',data)
       .then(res=>{
+        if(res.data.insertedId){
+            toast("Your Contest Request is ready for Admin Approval")
+             reset()
+        }
         console.log(res.data);
         
-      })
+      }).catch(err=>console.log(err.message)
+      )
     });
 
     // console.log(data);
@@ -47,9 +60,9 @@ const AddContest = () => {
       <div className="bg-amber-100  flex flex-col items-center justify-center md:py-11">
         <form
           onSubmit={handleSubmit(contestData)}
-          className="w-[500px] mx-auto bg-white shadow-2xl p-4  rounded-md pt-5"
+          className="w-[500px] mx-auto bg-white shadow-2xl p-4  rounded-md p-5"
         >
-          <h1 className="text-4xl font-bold mb-5">Give Contest Information</h1>
+          <h1 className="text-4xl font-bold mb-5 text-center md:py-6">Give Contest Information</h1>
           <fieldset className="fieldset space-y-4">
             {/* Name */}
             <div>

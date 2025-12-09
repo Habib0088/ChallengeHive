@@ -1,7 +1,7 @@
 import React from "react";
 
 import { NavLink, Outlet } from "react-router";
-import { FaUsers } from "react-icons/fa";
+import { FaFlag, FaUsers } from "react-icons/fa";
 import { TbFlagPlus } from "react-icons/tb";
 
 
@@ -133,12 +133,28 @@ const DashboardLayout = () => {
                   {/* Payment icon */}
                   {/* <FaRegCreditCard /> */}
                   {/* <IoAccessibilitySharp /> */}
-                  <TbFlagPlus />
+                  <TbFlagPlus className="text-xl" />
 
 
 
                   <span className="is-drawer-close:hidden">
                     Add Contest
+                  </span>
+                </button>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/myContestPage">
+                <button 
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="My Contest Page"
+                >
+                  {/* Payment icon */}
+                  {/* <FaRegCreditCard /> */}
+                  {/* <IoAccessibilitySharp /> */}
+                  <FaFlag className="text-xl" />
+                   <span className="is-drawer-close:hidden">
+                    My Contest Page
                   </span>
                 </button>
               </NavLink>
