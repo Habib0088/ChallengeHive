@@ -1,14 +1,29 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FaUser, FaTrophy, FaCalendarAlt } from "react-icons/fa";
+import { useParams } from "react-router";
+import useAxiosSecure from "../../hook/useAxiosSecure/useAxiosSecure";
+import Countdown from "../Countdown/Countdown";
 
-const ContestPage = () => {
+const ContestDetails = () => {
+    const axiosSecure=useAxiosSecure()
+    const {id}=useParams()
+    const {data:contest}=useQuery({
+        queryKey:['contestDetails',id],
+        queryFn:async ()=>{
+            const res=await axiosSecure.get(`/contestDetails/${id}`)
+            console.log(res.data);
+            
+            return res.data
+        }
+    })
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-500 to-blue-400 p-6">
+    <div className="min-h-screen flex items-center justify-center  bg-purple-700  text-black p-6">
       <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl max-w-3xl w-full p-6 space-y-6 border border-white/20">
         {/* Banner */}
-        <div className="w-full h-40 rounded-lg overflow-hidden">
-          <img
-            src="/path-to-your-banner.png" // replace with your image path
+        <div className="w-full h-[300px] rounded-lg overflow-hidden">
+          <img 
+            src={contest?.photoURL}
             alt="Future Tech Challenge"
             className="w-full h-full object-cover"
           />
@@ -16,30 +31,33 @@ const ContestPage = () => {
 
         {/* Contest Info */}
         <div className="space-y-2">
-          <p className="text-sm text-white/70">Contest Name:</p>
+          <div className="flex justify-between">
+            <p className=" text-white text-2xl font-bold">Contest Name:- {contest?.name}</p>
           <h1 className="text-2xl font-bold text-white">
-            AI Algorithm Desitim Design Sprint
+            {contest?.contestType}
           </h1>
-          <div className="flex items-center gap-4 text-white/80 mt-2">
+          </div>
+          <div className="flex justify-between items-center gap-4 text-white/80 mt-2">
             <div className="flex items-center gap-1">
               <FaUser /> 452 Participants
             </div>
             <div className="flex items-center gap-1">
-              <FaTrophy /> Prize Money: $10,000 USD
+              <FaTrophy /> Prize Money: ${contest?.prizeMoney} USD
             </div>
-            <div className="flex items-center gap-1">
-              <FaCalendarAlt /> Deadline: 02:15:37
-            </div>
+           
           </div>
+           <div className="flex items-center gap-1">
+            <h1 className="text-white font-bold text-xl">Time Left - </h1>
+              {/* <FaCalendarAlt /> {new Date(contest?.deadline).toLocaleString()} */}
+ <Countdown deadline={contest?.deadline} className="text-yellow-400 font-bold" />
+
+            </div>
         </div>
 
         {/* Description */}
-        <div className="bg-white/10 p-4 rounded-lg text-white/80">
-          <h2 className="font-semibold mb-2">Full Contest Description & Task Details</h2>
-          <p className="text-sm">
-            Design and implement a machine learning algorithm to optimize energy grid efficiency. 
-            Submissions must contain reference code and demo with clear documentation. Creativity, 
-            efficiency, and scalability are key metrics.
+        <div className="bg-white/10 p-4 rounded-lg text-white/80 text-center">
+          <h2 className="font-semibold mb-2 text-center text-2xl">Full Contest Description & Task Details</h2>
+          <p className="text-sm">{contest?.description}
           </p>
         </div>
 
@@ -71,4 +89,4 @@ const ContestPage = () => {
   );
 };
 
-export default ContestPage;
+export default ContestDetails;

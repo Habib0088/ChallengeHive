@@ -1,16 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
+import { Link } from "react-router";
+import Loading from "../../Loading/Loading";
 
 const AllContests = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: contests = [] } = useQuery({
+  const { isLoading,data: contests = [] } = useQuery({
     queryKey: ["allContests"],
     queryFn: async () => {
       const res = await axiosSecure.get("/allContests");
       return res.data;
     },
   });
+  if(isLoading){
+    return <Loading></Loading>
+  }
   return (
    <div className="bg-blue-100 md:py-6">
      <div className="w-11/12 mx-auto ">
@@ -31,7 +36,7 @@ const AllContests = () => {
             <p className="font-bold">Prize-Money  : {contest?.prizeMoney} $</p>
             
             <div className="card-actions justify-end ">
-              <button className="btn btn-primary text-black">Details</button>
+             <Link to={`/contestDetails/${contest._id}`}> <button className="btn btn-primary text-black">Details</button></Link>
             </div>
           </div>
         </div>
