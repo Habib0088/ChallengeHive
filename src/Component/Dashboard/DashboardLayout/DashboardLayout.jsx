@@ -1,8 +1,10 @@
 import React from "react";
 
 import { NavLink, Outlet } from "react-router";
-import { FaFlag, FaUsers } from "react-icons/fa";
+import { FaFlag, FaRegListAlt, FaUsers } from "react-icons/fa";
 import { TbFlagPlus } from "react-icons/tb";
+// import { FaRegListAlt } from "react-icons/fa";
+
 
 
 // import useRole from "../../../hook/useRole";
@@ -119,6 +121,25 @@ const DashboardLayout = () => {
                 </button>
               </NavLink>
             </li>
+             <li>
+              <NavLink to="/dashboard/manageContest">
+                <button 
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Manage Contest"
+                >
+                 <div className="flex items-center justify-center">
+                  
+                  <FaRegListAlt />
+
+
+
+                  <p className="is-drawer-close:hidden mx-4">
+                    Manage Contest
+                  </p>
+                 </div>
+                </button>
+              </NavLink>
+            </li>
             </>
            }
            {/* =============Creator only route */}
@@ -127,12 +148,10 @@ const DashboardLayout = () => {
             <li>
               <NavLink to="/dashboard/addContest">
                 <button 
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex justify-center items-center"
                   data-tip="Add Contest"
                 >
-                  {/* Payment icon */}
-                  {/* <FaRegCreditCard /> */}
-                  {/* <IoAccessibilitySharp /> */}
+                 
                   <TbFlagPlus className="text-xl" />
 
 

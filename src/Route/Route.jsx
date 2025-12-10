@@ -17,6 +17,8 @@ import ManageUsers from "../Component/Dashboard/ManageUsers/ManageUsers";
 import CreatorRoute from "./CreatorRoute";
 import AddContest from "../Component/Dashboard/AddContest/AddContest";
 import MyContestPage from "../Component/Dashboard/MyContestPage/MyContestPage";
+import EditContest from "../Component/Dashboard/EditContest/EditContest";
+import ManageContest from "../Component/Dashboard/ManageContest/ManageContest";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +71,12 @@ export const router = createBrowserRouter([
         path:'/dashboard/myContestPage',
         element:<PrivateRoute><CreatorRoute><MyContestPage></MyContestPage></CreatorRoute></PrivateRoute>
 
+      },{
+        path:'/dashboard/editContest/:id',
+        element:<PrivateRoute><CreatorRoute><EditContest></EditContest></CreatorRoute></PrivateRoute>
+      },{
+        path:'/dashboard/manageContest',
+        element:<PrivateRoute><AdminRoute><ManageContest></ManageContest></AdminRoute></PrivateRoute>
       }
     ]
   }

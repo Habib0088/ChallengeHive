@@ -99,16 +99,16 @@ const AddContest = () => {
             {/* Prize */}
             <div>
               <label className="label font-semibold text-md text-black ">
-                Prize
+                Price
               </label>
               <input
-                {...register("prize", { required: true, valueAsNumber: true })}
+                {...register("price", { required: true, valueAsNumber: true })}
                 type="number"
                 className="input w-full"
-                placeholder="Prize"
+                placeholder="Price"
               />
               {errors.prize && (
-                <p className="text-red-500">You have not provided Prize</p>
+                <p className="text-red-500">You have not provided Price</p>
               )}
             </div>
 
