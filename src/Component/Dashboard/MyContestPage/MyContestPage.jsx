@@ -117,7 +117,8 @@ const MyContestPage = () => {
                 <td>{contest.name}</td>
                 <td>{contest.status}</td>
                 <th>
-                  <Link to={`/dashboard/editContest/${contest._id}`}>
+              {contest.status!=='Approved'&&
+              <>    <Link to={`/dashboard/editContest/${contest._id}`}>
                     <button className="btn btn-primary text-black">Edit</button>
                   </Link>
                   <button
@@ -126,6 +127,7 @@ const MyContestPage = () => {
                   >
                     Delete
                   </button>
+              </>}
                   <button className="btn btn-primary text-black ml-2">
                     Submission
                   </button>

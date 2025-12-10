@@ -19,7 +19,8 @@ import AddContest from "../Component/Dashboard/AddContest/AddContest";
 import MyContestPage from "../Component/Dashboard/MyContestPage/MyContestPage";
 import EditContest from "../Component/Dashboard/EditContest/EditContest";
 import ManageContest from "../Component/Dashboard/ManageContest/ManageContest";
-
+import ContestDetails from "../Component/ContestDetails/ContestDetails";
+import AllContests from "../Component/Contest/AllContests/AllContests";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -30,9 +31,14 @@ export const router = createBrowserRouter([
             Component:Home
          
         },{
-          path:'/beContestCreator',
-         element:<PrivateRoute><BeContestCreator></BeContestCreator></PrivateRoute>
-        }
+          path:'/allContests',
+          Component:AllContests
+        },
+        {
+        path:'/contestDetails',
+        // Component:ContestDetails
+        element:<PrivateRoute><ContestDetails></ContestDetails></PrivateRoute>
+      }
     ]
   },
   {
@@ -47,7 +53,7 @@ export const router = createBrowserRouter([
         // Component:LogIn
         Component:LogIn
 
-      }
+      },
     ]
   },{
     path:'/dashboard',
@@ -56,7 +62,10 @@ export const router = createBrowserRouter([
       {
         index:true,
         Component:DashboardHome
-      },
+      },{
+          path:'/dashboard/beContestCreator',
+         element:<PrivateRoute><BeContestCreator></BeContestCreator></PrivateRoute>
+        },
       {
         path:'/dashboard/approveCreators',
         // Component:ApproveCreators

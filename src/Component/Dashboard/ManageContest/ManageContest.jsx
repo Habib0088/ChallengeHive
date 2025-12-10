@@ -4,10 +4,11 @@ import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 import { Link } from "react-router";
 import { toast } from "../../Authentication/Registration/Toast/toast";
 import Swal from "sweetalert2";
+import Loading from "../../Loading/Loading";
 
 const ManageContest = () => {
   const axiosSecure = useAxiosSecure();
-  const { refetch, data: contests = [] } = useQuery({
+  const {isLoading, refetch, data: contests = [] } = useQuery({
     queryKey: ["manageContest"],
     queryFn: async () => {
       const res = await axiosSecure.get("/manageContest");
@@ -54,6 +55,9 @@ const ManageContest = () => {
     });
     console.log(id, status);
   };
+  if(isLoading){
+    return <Loading></Loading>
+  }
   return (
     <div>
       <h1>Manage contest {contests.length}</h1>

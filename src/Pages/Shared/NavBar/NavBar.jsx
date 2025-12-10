@@ -31,7 +31,7 @@ const NavBar = () => {
      </Link>
 
       {/* Middle:- Menu */}
-      <ul className="hidden md:flex space-x-8 text-gray-700 font-medium">
+      <ul className="hidden md:flex space-x-3 text-gray-700 font-medium">
         <li>
           <NavLink to='/'  className="hover:text-blue-600">
             Home
@@ -39,17 +39,12 @@ const NavBar = () => {
         
         </li>
         <li>
-          <li>
-          <NavLink to='/beContestCreator' className="hover:text-blue-600">
-            Be Contest Creator
-          </NavLink>
-        
-        </li>
+         
         </li>
        
          <li>
-          <NavLink to='/contact'  className="hover:text-blue-600">
-            Contact
+          <NavLink to='/allContests'  className="hover:text-blue-600">
+            All Contests
           </NavLink>
           
         

@@ -2,12 +2,13 @@ import React, { use } from "react";
 import { Query, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 import Swal from "sweetalert2";
+import Loading from "../../Loading/Loading";
 
 
 const ApproveCreators = () => {
   const axiosSecure = useAxiosSecure();
   // এটা Database থেকে Data এনেছে Admin দারা approve বা reject করার জন্য
-  const {refetch, data: creators = [] } = useQuery({
+  const {refetch,isLoading,data: creators = [] } = useQuery({
     queryKey: ["approveCreators"],
     queryFn: async () => {
       const res = await axiosSecure.get("http://localhost:3000/creators");
@@ -37,7 +38,9 @@ const ApproveCreators = () => {
       }
     });
   };
-
+if(isLoading){
+  return <Loading></Loading>
+}
   return (
     <div>
       <h1 className="te-xl font-bold"> Total Creators : {creators.length}</h1>

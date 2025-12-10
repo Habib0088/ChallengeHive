@@ -1,7 +1,7 @@
 import React from "react";
 
 import { NavLink, Outlet } from "react-router";
-import { FaFlag, FaRegListAlt, FaUsers } from "react-icons/fa";
+import { FaFlag, FaRegListAlt, FaUserPlus, FaUsers } from "react-icons/fa";
 import { TbFlagPlus } from "react-icons/tb";
 // import { FaRegListAlt } from "react-icons/fa";
 
@@ -57,6 +57,17 @@ const DashboardLayout = () => {
         <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
           {/* Sidebar content here */}
           <ul className="menu w-full grow">
+            {/* ============User only route */}
+            {role==='user'&&
+            <>
+            
+             {/* <li>
+                      <NavLink to='/beContestCreator' className="hover:text-blue-600">
+                        Be Contest Creator
+                      </NavLink>
+                    
+                    </li> */}
+            </>}
             {/* List item */}
             <li>
               <NavLink to="/">
@@ -79,6 +90,20 @@ const DashboardLayout = () => {
                     <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                   </svg>
                   <span className="is-drawer-close:hidden">Homepage</span>
+                </button>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/dashboard/beContestCreator">
+                <button
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Be Contest Creator"
+                >
+                  {/* Home icon */}
+                  <FaUserPlus />
+
+                  <span className="is-drawer-close:hidden">Be Contest Creator</span>
                 </button>
               </NavLink>
             </li>
