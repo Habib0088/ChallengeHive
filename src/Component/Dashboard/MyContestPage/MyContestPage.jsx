@@ -21,6 +21,8 @@ const MyContestPage = () => {
       return res.data;
     },
   });
+  console.log(contests);
+  
   const handleDelete = (id) => {
     console.log(id);
     // Delete start
@@ -128,9 +130,12 @@ const MyContestPage = () => {
                     Delete
                   </button>
               </>}
-                  <button className="btn btn-primary text-black ml-2">
+                  {/* <Link to={`dashboard/submission/${contest._id}`}><button className="btn btn-primary text-black ml-2">
                     Submission
-                  </button>
+                  </button></Link> */}
+                  <Link to={`/dashboard/submission/${contest._id}`}><button className="btn btn-primary text-black ml-2">
+                    Submission
+                  </button></Link>
                 </th>
               </tr>
             ))}

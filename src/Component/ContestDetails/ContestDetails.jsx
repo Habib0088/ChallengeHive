@@ -6,6 +6,7 @@ import useAxiosSecure from "../../hook/useAxiosSecure/useAxiosSecure";
 import Countdown from "../Countdown/Countdown";
 import useAuth from "../../hook/useAuth";
 import { useForm } from "react-hook-form";
+import Loading from "../Loading/Loading";
 // import { toast } from "../../Authentication/Registration/Toast/toast";
 import { toast } from "../Authentication/Registration/Toast/toast";
 const ContestDetails = () => {
@@ -15,7 +16,7 @@ const ContestDetails = () => {
   const [participantInfo,setParticipantInfo]=useState(null)
   
 
-  const { data: contest } = useQuery({
+  const { refetch,isLoading,data: contest } = useQuery({
     queryKey: ["contestDetails", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/contestDetails/${id}`);
@@ -24,15 +25,7 @@ const ContestDetails = () => {
       return res.data;
     },
   });
-//  Request for getting information
-// const{data:info}=useQuery({
-//   queryKey:['paidInfo',contest?._id],
-//   queryFn:async()=>{
-//     const res=axiosSecure.get(`/contest/participant?contestId=${contest?._id}&email=${user?.email}`)
-//     return res.data
-//   }
-// })
-// console.log(info);
+
 
     useEffect(()=>{
         if (!contest?._id || !user?.email) return;
@@ -81,12 +74,17 @@ const ContestDetails = () => {
     axiosSecure.patch(`/taskInfo/${contest._id}`,taskData).then(res=>{
       if(res.data.modifiedCount){
         toast("Task Info has been Added")
+        refetch()
       }
       console.log(res.data)}
     )
+
+
   }
   // console.log(contest?.participants?.paymentStatus);
-  
+  if(isLoading){
+    return <Loading></Loading>
+  }
   return (
     <div className="min-h-screen flex items-center justify-center  bg-purple-700  text-black p-6">
       <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl max-w-3xl w-full p-2 md:p-6 space-y-6 border border-white/20">
@@ -153,14 +151,27 @@ const ContestDetails = () => {
            
             </>
           } */}
+          {/* ++++=========================================== */}
+          
+          {/* ++++=========================================== */}
           {
-            participantInfo?.paymentStatus==='paid'&&
+            participantInfo?.paymentStatus==='paid'&& 
+
+            participantInfo?.taskInfo ?
+            <button className="btn"> Already Submitted</button>
+            :
             <>
              <button onClick={handleSubmit(handleSendTaskInfo)} className="mt-2 block bg-primary text-black w-[400px] mx-auto text-center  hover:bg-purple-700  font-bold px-4 py-2 rounded-md">
             Submit
           </button>
             </>
           }
+          {/* {
+            participantInfo?.taskInfo &&
+            <>
+            <button className="btn">Submitted</button>
+            </>
+          } */}
             {/* <button onClick={handleSubmit(handleSendTaskInfo)} className="mt-2 block bg-primary text-black w-[400px] mx-auto text-center  hover:bg-purple-700  font-bold px-4 py-2 rounded-md">
              Submit
            </button> */}
@@ -174,8 +185,8 @@ const ContestDetails = () => {
         {/* Buttons */}
         <div className="flex gap-4">
        {
-        participantInfo?.paymentStatus!=='paid'&&
-        <>
+        participantInfo?.paymentStatus!=='paid'?
+   <>
            <button 
             onClick={handlePayment}
             className="btn btn-primary w-full text-black w-1/2 font-bold"
@@ -184,6 +195,10 @@ const ContestDetails = () => {
             Pay {contest?.price} $
           </button>
         </>
+        :
+               <button disabled className="btn bg-black-500 text red">Paid</button>
+       
+       
        }
           {/* <button className="btn btn-disabled text-black w-1/2">
             Submit Task (Disabled)

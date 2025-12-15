@@ -22,6 +22,7 @@ import ManageContest from "../Component/Dashboard/ManageContest/ManageContest";
 import ContestDetails from "../Component/ContestDetails/ContestDetails";
 import AllContests from "../Component/Contest/AllContests/AllContests";
 import PaymentSuccess from "../Component/Payment/PaymentSuccess/PaymentSuccess";
+import Submission from "../Component/Dashboard/Submission/Submission";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -90,6 +91,9 @@ export const router = createBrowserRouter([
       },{
         path:'/dashboard/manageContest',
         element:<PrivateRoute><AdminRoute><ManageContest></ManageContest></AdminRoute></PrivateRoute>
+      },{
+        path:'/dashboard/submission/:id',
+        element:<PrivateRoute><CreatorRoute><Submission></Submission></CreatorRoute></PrivateRoute>
       }
     ]
   }
