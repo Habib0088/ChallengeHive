@@ -57,7 +57,7 @@ const NavBar = () => {
       
       {
         user?
-         <div className="relative group">
+         <div className="relative group z-50">
        <img src={user.photoURL} className="h-15 w-15 rounded-full" referrerPolicy="no-referrer" alt="" />
 
         <div className="absolute right-0  w-40 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition">

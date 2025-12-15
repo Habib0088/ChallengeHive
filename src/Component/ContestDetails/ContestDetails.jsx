@@ -1,16 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaUser, FaTrophy, FaCalendarAlt } from "react-icons/fa";
 import { Form, useParams } from "react-router";
 import useAxiosSecure from "../../hook/useAxiosSecure/useAxiosSecure";
 import Countdown from "../Countdown/Countdown";
 import useAuth from "../../hook/useAuth";
 import { useForm } from "react-hook-form";
-
+// import { toast } from "../../Authentication/Registration/Toast/toast";
+import { toast } from "../Authentication/Registration/Toast/toast";
 const ContestDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { id } = useParams();
+  const [participantInfo,setParticipantInfo]=useState(null)
+  
 
   const { data: contest } = useQuery({
     queryKey: ["contestDetails", id],
@@ -21,7 +24,29 @@ const ContestDetails = () => {
       return res.data;
     },
   });
-  // console.log(contest);
+//  Request for getting information
+// const{data:info}=useQuery({
+//   queryKey:['paidInfo',contest?._id],
+//   queryFn:async()=>{
+//     const res=axiosSecure.get(`/contest/participant?contestId=${contest?._id}&email=${user?.email}`)
+//     return res.data
+//   }
+// })
+// console.log(info);
+
+    useEffect(()=>{
+        if (!contest?._id || !user?.email) return;
+      axiosSecure.get(`/contest/participant?contestId=${contest?._id}&email=${user?.email}`)
+    .then(res=>
+    setParticipantInfo(res.data)
+      
+      // console.log(res.data)
+    )
+    
+
+    },[contest?._id,contest?.email])
+  console.log(participantInfo);
+
 
   // Payment
   const handlePayment = async () => {
@@ -52,11 +77,15 @@ const ContestDetails = () => {
 
   const handleSendTaskInfo=(taskData)=>{
     console.log(taskData);
-    taskData.email=user.email
-    axiosSecure.patch(`/taskInfo/${contest._id}`,taskData).then(res=>console.log(res.data)
+    taskData.email=user?.email
+    axiosSecure.patch(`/taskInfo/${contest._id}`,taskData).then(res=>{
+      if(res.data.modifiedCount){
+        toast("Task Info has been Added")
+      }
+      console.log(res.data)}
     )
   }
-  console.log(contest?.participants?.paymentStatus);
+  // console.log(contest?.participants?.paymentStatus);
   
   return (
     <div className="min-h-screen flex items-center justify-center  bg-purple-700  text-black p-6">
@@ -121,14 +150,20 @@ const ContestDetails = () => {
           {/* {
             contest?.participants?.paymentStatus==='paid'&&
             <>
-            <button onClick={handleSubmit(handleSendTaskInfo())} className="mt-2 block bg-primary text-black w-[400px] mx-auto text-center  hover:bg-purple-700  font-bold px-4 py-2 rounded-md">
+           
+            </>
+          } */}
+          {
+            participantInfo?.paymentStatus==='paid'&&
+            <>
+             <button onClick={handleSubmit(handleSendTaskInfo)} className="mt-2 block bg-primary text-black w-[400px] mx-auto text-center  hover:bg-purple-700  font-bold px-4 py-2 rounded-md">
             Submit
           </button>
             </>
-          } */}
-            <button onClick={handleSubmit(handleSendTaskInfo)} className="mt-2 block bg-primary text-black w-[400px] mx-auto text-center  hover:bg-purple-700  font-bold px-4 py-2 rounded-md">
+          }
+            {/* <button onClick={handleSubmit(handleSendTaskInfo)} className="mt-2 block bg-primary text-black w-[400px] mx-auto text-center  hover:bg-purple-700  font-bold px-4 py-2 rounded-md">
              Submit
-           </button>
+           </button> */}
         </div>
 
         {/* Winner Circle */} 
@@ -138,13 +173,18 @@ const ContestDetails = () => {
 
         {/* Buttons */}
         <div className="flex gap-4">
-          <button 
+       {
+        participantInfo?.paymentStatus!=='paid'&&
+        <>
+           <button 
             onClick={handlePayment}
             className="btn btn-primary w-full text-black w-1/2 font-bold"
           >
             {" "}
             Pay {contest?.price} $
           </button>
+        </>
+       }
           {/* <button className="btn btn-disabled text-black w-1/2">
             Submit Task (Disabled)
           </button> */}
