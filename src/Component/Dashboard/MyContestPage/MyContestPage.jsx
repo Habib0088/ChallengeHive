@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 import { Link } from "react-router";
 import Loading from "../../Loading/Loading";
-import { toast } from "../../Authentication/Registration/Toast/toast";
+
 import Swal from "sweetalert2";
 
 const MyContestPage = () => {

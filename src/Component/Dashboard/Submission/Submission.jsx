@@ -3,10 +3,10 @@ import React from "react";
 import { useParams } from "react-router";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 import { toast } from "../../Authentication/Registration/Toast/toast";
-import useAuth from "../../../hook/useAuth";
+
 
 const Submission = () => {
-const{user}=useAuth()
+
     const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const handleWinner=(participant)=>{
