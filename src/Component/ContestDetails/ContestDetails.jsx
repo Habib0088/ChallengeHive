@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FaUser, FaTrophy, FaCalendarAlt } from "react-icons/fa";
-import { useParams } from "react-router";
+import { Form, useParams } from "react-router";
 import useAxiosSecure from "../../hook/useAxiosSecure/useAxiosSecure";
 import Countdown from "../Countdown/Countdown";
 import useAuth from "../../hook/useAuth";
+import { useForm } from "react-hook-form";
 
 const ContestDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -15,7 +16,7 @@ const ContestDetails = () => {
     queryKey: ["contestDetails", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/contestDetails/${id}`);
-      console.log(res.data);
+      // console.log(res.data);
 
       return res.data;
     },
@@ -46,6 +47,17 @@ const ContestDetails = () => {
     console.log(res.data);
     window.location.href = res.data.url;
   };
+  const {register,handleSubmit}=useForm()
+
+
+  const handleSendTaskInfo=(taskData)=>{
+    console.log(taskData);
+    taskData.email=user.email
+    axiosSecure.patch(`/taskInfo/${contest._id}`,taskData).then(res=>console.log(res.data)
+    )
+  }
+  console.log(contest?.participants?.paymentStatus);
+  
   return (
     <div className="min-h-screen flex items-center justify-center  bg-purple-700  text-black p-6">
       <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl max-w-3xl w-full p-2 md:p-6 space-y-6 border border-white/20">
@@ -69,8 +81,8 @@ const ContestDetails = () => {
             </h1>
           </div>
           <div className="flex justify-between items-center gap-4 text-white mt-2">
-            <div className="flex items-center gap-1 text-sm">
-              <FaUser /> 452 Participants
+            <div className="flex items-center gap-1 text-sm justify-center">
+              <FaUser /> {contest?.participants?.length|| 0}
             </div>
             <div className="  items-center gap-1">
               <div className="flex items-center justify-between">
@@ -101,33 +113,41 @@ const ContestDetails = () => {
         {/* Submission Box */}
         <div className="bg-white/10 p-4 rounded-lg text-white/80 relative">
           <h2 className="font-semibold mb-2">Submit Your Task</h2>
-          <input
+          <input {...register('info')}
             type="text"
             placeholder="Submission Links (GitHub, Demo, Paper)"
             className="w-full p-2 rounded-md text-black"
           />
-          <button className="mt-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md">
+          {/* {
+            contest?.participants?.paymentStatus==='paid'&&
+            <>
+            <button onClick={handleSubmit(handleSendTaskInfo())} className="mt-2 block bg-primary text-black w-[400px] mx-auto text-center  hover:bg-purple-700  font-bold px-4 py-2 rounded-md">
             Submit
           </button>
+            </>
+          } */}
+            <button onClick={handleSubmit(handleSendTaskInfo)} className="mt-2 block bg-primary text-black w-[400px] mx-auto text-center  hover:bg-purple-700  font-bold px-4 py-2 rounded-md">
+             Submit
+           </button>
         </div>
 
-        {/* Winner Circle */}
-        {/* <div className="border-2 border-dashed border-white/30 rounded-lg p-4 text-white/70 text-center">
+        {/* Winner Circle */} 
+        <div className="border-2 border-dashed border-white/30 rounded-lg p-4 text-white/70 text-center">
           Winner will be announced here after the deadline!
-        </div> */}
+        </div>
 
         {/* Buttons */}
         <div className="flex gap-4">
-          <button
+          <button 
             onClick={handlePayment}
-            className="btn btn-primary text-black w-1/2 font-bold"
+            className="btn btn-primary w-full text-black w-1/2 font-bold"
           >
             {" "}
             Pay {contest?.price} $
           </button>
-          <button className="btn btn-disabled text-black w-1/2">
+          {/* <button className="btn btn-disabled text-black w-1/2">
             Submit Task (Disabled)
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

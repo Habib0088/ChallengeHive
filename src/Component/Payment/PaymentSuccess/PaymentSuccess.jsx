@@ -13,11 +13,13 @@ const PaymentSuccess = () => {
     },[sessionId])
     
     return (
-        <div className='flex h-screen items-center bg-blue-300 justify-center'>
+        <div className='flex h-[70vh] items-center bg-blue-300 justify-center'>
            <div>
-             <h1 className='font-bold text-3xl '>🤩🤩Congratulations,Your payment has been Successfull🤩🤩</h1>
+             <h1 className='font-bold text-3xl text-center '>🤩🤩Congratulations,Your payment has been Successfull🤩🤩</h1>
            </div>
         </div>
+
+     
     );
 };
 
