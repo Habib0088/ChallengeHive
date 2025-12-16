@@ -4,11 +4,22 @@ import logo from '../../../assets/ChallengeHive.png'
 import AuthProvider from "../../../Component/Context/AuthProvider/AuthProvider";
 import useAuth from "../../../hook/useAuth";
 import './nav.css'
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 
 const NavBar = () => {
+  const axiosSecure=useAxiosSecure()
+
  
   // const {user}=AuthProvider()
   const{user,logOut}=useAuth()
+       const {data:userProfile}=useQuery({
+        queryKey:['users',user.email],
+        queryFn:async()=>{
+            const res=await axiosSecure.get(`/users/profile?email=${user.email}`)
+            return res.data
+        }
+    })
   const handleLogout = () => {
   logOut()
     .then(() => console.log("Logged out"))
@@ -58,11 +69,11 @@ const NavBar = () => {
       {
         user?
          <div className="relative group z-50">
-       <img src={user.photoURL} className="h-15 w-15 rounded-full" referrerPolicy="no-referrer" alt="" />
+       <img src={userProfile?.photoURL} className="h-15 w-15 rounded-full" referrerPolicy="no-referrer" alt="" />
 
         <div className="absolute right-0  w-40 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition">
           <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-            {user.displayName}
+            {userProfile?.displayName}
           </a>
           <Link to='/dashboard' className="block px-4 py-2 hover:bg-gray-100">
             Dashboard
