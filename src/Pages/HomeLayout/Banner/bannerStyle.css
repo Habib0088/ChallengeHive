@@ -1,0 +1,11 @@
+.banner {
+  height: 80vh;
+  width: 700px;
+  width: 91.6667%;
+  margin: 0 auto;
+  background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url("https://i.ibb.co.com/ZzQF1489/colombian-national-soccer-team-concept-still-life-1.jpg");
+  background-size: cover;
+  background-position: center;
+}

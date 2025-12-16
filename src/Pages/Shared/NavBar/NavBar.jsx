@@ -27,14 +27,14 @@ const NavBar = () => {
 };
 
   return (
-    <nav className="w-full bg-blue-100 shadow px-6 py-3 flex items-center justify-between">
+    <nav className="w-full bg-blue-200 shadow px-6 py-3 flex items-center justify-between">
       {/* Left*/}
      <Link to='/'> 
       <div className="flex items-center space-x-2">
         <img
          src={logo}
           alt="Logo"
-          className="h-20 w-20"
+          className="h-20 w-20 rounded-md"
         />
        
       </div>

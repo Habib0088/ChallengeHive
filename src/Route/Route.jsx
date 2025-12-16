@@ -29,6 +29,7 @@ import MyWinningContests from "../Component/Dashboard/MyWinningContests/MyWinnin
 import Profile from "../Component/Dashboard/Profile/Profile";
 import UpdateProfile from "../Component/Dashboard/Profile/UpdateProfile";
 import Error from "../Component/Error/Error";
+import HomeLayout from "../Pages/HomeLayout/HomeLayout";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
     children:[
         {
             index:true,
-            Component:Home
+            Component:HomeLayout
          
         },{
           path:'/allContests',
