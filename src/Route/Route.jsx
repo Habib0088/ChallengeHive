@@ -27,6 +27,7 @@ import UserRoute from "../Route/UserRoute"
 import MyParticipatedContests from "../Component/Dashboard/MyParticipatedContests/MyParticipatedContests";
 import MyWinningContests from "../Component/Dashboard/MyWinningContests/MyWinningContests";
 import Profile from "../Component/Dashboard/Profile/Profile";
+import UpdateProfile from "../Component/Dashboard/Profile/UpdateProfile";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -107,6 +108,9 @@ export const router = createBrowserRouter([
       },{
         path:"/dashboard/Profile",
         element:<PrivateRoute><UserRoute><Profile></Profile></UserRoute></PrivateRoute>
+      },{
+        path:'/dashboard/updateProfile',
+        element:<PrivateRoute><UserRoute><UpdateProfile></UpdateProfile></UserRoute></PrivateRoute>
       }
     ]
   }
