@@ -5,6 +5,7 @@ import {
   FaFlag,
   FaFlagCheckered,
   FaRegListAlt,
+  FaRegUser,
   FaUserMd,
   FaUserPlus,
   FaUsers,
@@ -65,7 +66,7 @@ const DashboardLayout = () => {
             <li>
               <NavLink to="/">
                 <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-2 items-center"
                   data-tip="Homepage"
                 >
                   {/* Home icon */}
@@ -91,7 +92,7 @@ const DashboardLayout = () => {
                 <li>
                   <NavLink to="/dashboard/beContestCreator">
                     <button
-                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-2 items-center"
                       data-tip="Be Contest Creator"
                     >
                       {/* Home icon */}
@@ -106,7 +107,7 @@ const DashboardLayout = () => {
                 <li>
                   <NavLink to="/dashboard/myContest">
                     <button
-                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-2 items-center"
                       data-tip="My Participated Contest"
                     >
                       {/* Home icon */}
@@ -121,13 +122,28 @@ const DashboardLayout = () => {
                 <li>
                   <NavLink to="/dashboard/myWinningContests">
                     <button
-                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-2 items-center"
                       data-tip="My Winning Contests"
                     >
                       {/* Home icon */}
                       <FaFlagCheckered />
                       <span className="is-drawer-close:hidden">
                         My Winning Contests
+                      </span>
+                    </button>
+                  </NavLink>
+                </li>
+                <li >
+                  <NavLink to="/dashboard/profile">
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-2 items-center"
+                      data-tip="Profile"
+                    >
+                      {/* Home icon */}
+                      <FaRegUser />
+
+                      <span className="is-drawer-close:hidden">
+                        Profile
                       </span>
                     </button>
                   </NavLink>
