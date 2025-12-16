@@ -23,6 +23,8 @@ import ContestDetails from "../Component/ContestDetails/ContestDetails";
 import AllContests from "../Component/Contest/AllContests/AllContests";
 import PaymentSuccess from "../Component/Payment/PaymentSuccess/PaymentSuccess";
 import Submission from "../Component/Dashboard/Submission/Submission";
+import UserRoute from "../Route/UserRoute"
+import MyParticipatedContests from "../Component/Dashboard/MyParticipatedContests/MyParticipatedContests";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -94,6 +96,9 @@ export const router = createBrowserRouter([
       },{
         path:'/dashboard/submission/:id',
         element:<PrivateRoute><CreatorRoute><Submission></Submission></CreatorRoute></PrivateRoute>
+      },{
+        path:'/dashboard/myContest',
+        element:<PrivateRoute><UserRoute><MyParticipatedContests></MyParticipatedContests></UserRoute></PrivateRoute>
       }
     ]
   }

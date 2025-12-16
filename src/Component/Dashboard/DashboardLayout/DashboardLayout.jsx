@@ -1,9 +1,8 @@
 import React from "react";
 
 import { NavLink, Outlet } from "react-router";
-import { FaFlag, FaRegListAlt, FaUserPlus, FaUsers } from "react-icons/fa";
+import { FaFlag, FaRegListAlt, FaUserMd, FaUserPlus, FaUsers } from "react-icons/fa";
 import { TbFlagPlus } from "react-icons/tb";
-// import { FaRegListAlt } from "react-icons/fa";
 
 
 
@@ -12,7 +11,7 @@ import { IoAccessibilitySharp } from "react-icons/io5";
 import useRole from "../../../hook/useRole";
 
 const DashboardLayout = () => {
-  const {role}=useRole()
+  const { role } = useRole();
   //   const { role } = useRole();
   return (
     <div className="drawer lg:drawer-open">
@@ -44,7 +43,7 @@ const DashboardLayout = () => {
           <div className="px-4">Navbar Title</div>
         </nav>
         {/* Page content here */}
-      
+
         <Outlet></Outlet>
       </div>
 
@@ -58,18 +57,7 @@ const DashboardLayout = () => {
           {/* Sidebar content here */}
           <ul className="menu w-full grow">
             {/* ============User only route */}
-            {role==='user'&&
-            <>
-            
-             {/* <li>
-                      <NavLink to='/beContestCreator' className="hover:text-blue-600">
-                        Be Contest Creator
-                      </NavLink>
-                    
-                    </li> */}
-            </>}
-            {/* List item */}
-            <li>
+             <li>
               <NavLink to="/">
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -93,117 +81,134 @@ const DashboardLayout = () => {
                 </button>
               </NavLink>
             </li>
+            {role === "user" && (
+              <>
+                <li>
+                  <NavLink to="/dashboard/beContestCreator">
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Be Contest Creator"
+                    >
+                      {/* Home icon */}
+                      <FaUserPlus />
 
-            <li>
-              <NavLink to="/dashboard/beContestCreator">
-                <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Be Contest Creator"
-                >
-                  {/* Home icon */}
-                  <FaUserPlus />
+                      <span className="is-drawer-close:hidden">
+                        Be Contest Creator
+                      </span>
+                    </button>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/myContest">
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="My Participated Contest"
+                    >
+                      {/* Home icon */}
+                     <FaUserMd />
 
-                  <span className="is-drawer-close:hidden">Be Contest Creator</span>
-                </button>
-              </NavLink>
-            </li>
+
+                      <span className="is-drawer-close:hidden">
+                        My Participated Contest
+                      </span>
+                    </button>
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {/* List item */}
+           
+
             {/* Payment  */}
             {/* ======================Admin only route */}
-           {
-            role==='admin'&&
-            <>
-             <li>
-              <NavLink to="/dashboard/approveCreators">
-                <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Approve Creators"
-                >
-                  {/* Payment icon */}
-                  {/* <FaRegCreditCard /> */}
-                  <IoAccessibilitySharp />
+            {role === "admin" && (
+              <>
+                <li>
+                  <NavLink to="/dashboard/approveCreators">
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Approve Creators"
+                    >
+                      {/* Payment icon */}
+                      {/* <FaRegCreditCard /> */}
+                      <IoAccessibilitySharp />
 
-                  <span className="is-drawer-close:hidden">
-                    Approve Creators
-                  </span>
-                </button>
-              </NavLink>
-            </li>
-             <li>
-              <NavLink to="/dashboard/manageUsers">
-                <button 
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Manage Users"
-                >
-                  {/* Payment icon */}
-                  {/* <FaRegCreditCard /> */}
-                  {/* <IoAccessibilitySharp /> */}
-                  <FaUsers />
+                      <span className="is-drawer-close:hidden">
+                        Approve Creators
+                      </span>
+                    </button>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/manageUsers">
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Manage Users"
+                    >
+                      {/* Payment icon */}
+                      {/* <FaRegCreditCard /> */}
+                      {/* <IoAccessibilitySharp /> */}
+                      <FaUsers />
 
+                      <span className="is-drawer-close:hidden">
+                        Manage Users
+                      </span>
+                    </button>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/manageContest">
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Manage Contest"
+                    >
+                      <div className="flex items-center justify-center">
+                        <FaRegListAlt />
 
-                  <span className="is-drawer-close:hidden">
-                    Manage Users
-                  </span>
-                </button>
-              </NavLink>
-            </li>
-             <li>
-              <NavLink to="/dashboard/manageContest">
-                <button 
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Manage Contest"
-                >
-                 <div className="flex items-center justify-center">
-                  
-                  <FaRegListAlt />
+                        <p className="is-drawer-close:hidden mx-4">
+                          Manage Contest
+                        </p>
+                      </div>
+                    </button>
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {/* =============Creator only route */}
+            {role === "creator" && (
+              <>
+                <li>
+                  <NavLink to="/dashboard/addContest">
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex justify-center items-center"
+                      data-tip="Add Contest"
+                    >
+                      <TbFlagPlus className="text-xl" />
 
-
-
-                  <p className="is-drawer-close:hidden mx-4">
-                    Manage Contest
-                  </p>
-                 </div>
-                </button>
-              </NavLink>
-            </li>
-            </>
-           }
-           {/* =============Creator only route */}
-           {role==='creator' &&
-           <>
-            <li>
-              <NavLink to="/dashboard/addContest">
-                <button 
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex justify-center items-center"
-                  data-tip="Add Contest"
-                >
-                 
-                  <TbFlagPlus className="text-xl" />
-
-
-
-                  <span className="is-drawer-close:hidden">
-                    Add Contest
-                  </span>
-                </button>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/myContestPage">
-                <button 
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="My Contest Page"
-                >
-                  {/* Payment icon */}
-                  {/* <FaRegCreditCard /> */}
-                  {/* <IoAccessibilitySharp /> */}
-                  <FaFlag className="text-xl" />
-                   <span className="is-drawer-close:hidden">
-                    My Contest Page
-                  </span>
-                </button>
-              </NavLink>
-            </li>
-           </>}
+                      <span className="is-drawer-close:hidden">
+                        Add Contest
+                      </span>
+                    </button>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/myContestPage">
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="My Contest Page"
+                    >
+                      {/* Payment icon */}
+                      {/* <FaRegCreditCard /> */}
+                      {/* <IoAccessibilitySharp /> */}
+                      <FaFlag className="text-xl" />
+                      <span className="is-drawer-close:hidden">
+                        My Contest Page
+                      </span>
+                    </button>
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
