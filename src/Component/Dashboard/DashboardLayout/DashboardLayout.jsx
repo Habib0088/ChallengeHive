@@ -1,10 +1,15 @@
 import React from "react";
 
 import { NavLink, Outlet } from "react-router";
-import { FaFlag, FaRegListAlt, FaUserMd, FaUserPlus, FaUsers } from "react-icons/fa";
+import {
+  FaFlag,
+  FaFlagCheckered,
+  FaRegListAlt,
+  FaUserMd,
+  FaUserPlus,
+  FaUsers,
+} from "react-icons/fa";
 import { TbFlagPlus } from "react-icons/tb";
-
-
 
 // import useRole from "../../../hook/useRole";
 import { IoAccessibilitySharp } from "react-icons/io5";
@@ -57,7 +62,7 @@ const DashboardLayout = () => {
           {/* Sidebar content here */}
           <ul className="menu w-full grow">
             {/* ============User only route */}
-             <li>
+            <li>
               <NavLink to="/">
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -105,8 +110,7 @@ const DashboardLayout = () => {
                       data-tip="My Participated Contest"
                     >
                       {/* Home icon */}
-                     <FaUserMd />
-
+                      <FaUserMd />
 
                       <span className="is-drawer-close:hidden">
                         My Participated Contest
@@ -114,10 +118,23 @@ const DashboardLayout = () => {
                     </button>
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to="/dashboard/myWinningContests">
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="My Winning Contests"
+                    >
+                      {/* Home icon */}
+                      <FaFlagCheckered />
+                      <span className="is-drawer-close:hidden">
+                        My Winning Contests
+                      </span>
+                    </button>
+                  </NavLink>
+                </li>
               </>
             )}
             {/* List item */}
-           
 
             {/* Payment  */}
             {/* ======================Admin only route */}
