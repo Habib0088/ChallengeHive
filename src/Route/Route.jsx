@@ -28,6 +28,7 @@ import MyParticipatedContests from "../Component/Dashboard/MyParticipatedContest
 import MyWinningContests from "../Component/Dashboard/MyWinningContests/MyWinningContests";
 import Profile from "../Component/Dashboard/Profile/Profile";
 import UpdateProfile from "../Component/Dashboard/Profile/UpdateProfile";
+import Error from "../Component/Error/Error";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -48,6 +49,9 @@ export const router = createBrowserRouter([
       },{
         path:'/paymentSuccess',
         element:<PrivateRoute><PaymentSuccess></PaymentSuccess></PrivateRoute>
+      },{
+        path:'/*',
+        Component:Error
       }
     ]
   },
