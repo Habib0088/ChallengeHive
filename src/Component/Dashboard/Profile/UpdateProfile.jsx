@@ -20,6 +20,8 @@ const UpdateProfile = () => {
   const { register, handleSubmit } = useForm();
 
  const handleFormData = async (userFormData) => {
+    console.log(userFormData);
+    
   try {
     // default old photo
     let photoURL = userProfile?.photoURL || "";
@@ -38,6 +40,8 @@ const UpdateProfile = () => {
 
     const userInfo = {
       displayName: userFormData.name || userProfile?.displayName,
+      Bio:userFormData.bio,
+       
       photoURL,
     };
 
@@ -66,6 +70,7 @@ const UpdateProfile = () => {
             <div className="card-body">
               <form onSubmit={handleSubmit(handleFormData)}>
                 <fieldset className="fieldset">
+                    {/* Name */}
                   <label className="label">Name</label>
                   <input
                     {...register("name")}
@@ -73,6 +78,15 @@ const UpdateProfile = () => {
                     type="text"
                     className="input"
                     placeholder="Name"
+                  />
+                  {/* Bio */}
+                  <label className="label">Bio</label>
+                  <input
+                    {...register("bio")}
+                    
+                    type="text"
+                    className="input"
+                    placeholder="bio"
                   />
 
                   <label className="label font-semibold">Upload Photo</label>

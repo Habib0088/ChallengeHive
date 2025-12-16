@@ -14,7 +14,7 @@ const NavBar = () => {
   // const {user}=AuthProvider()
   const{user,logOut}=useAuth()
        const {data:userProfile}=useQuery({
-        queryKey:['users',user.email],
+        queryKey:['users',user?.email],
         queryFn:async()=>{
             const res=await axiosSecure.get(`/users/profile?email=${user.email}`)
             return res.data

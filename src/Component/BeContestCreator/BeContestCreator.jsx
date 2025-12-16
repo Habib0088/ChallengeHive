@@ -20,7 +20,7 @@ const BeContestCreator = () => {
   return (
     <div className="bg-amber-100 h-[80vh] flex flex-col items-center justify-center">
       <form onSubmit={handleSubmit(dataOfForm)} className="w-[500px] mx-auto  bg-white shadow-2xl p-4 text-center rounded-md pt-5">
-        <h1 className="text-4xl font-bold"> Give Your Information </h1>
+        <h1 className="text-4xl font-bold"> Become Contest Creator </h1>
         <fieldset className="fieldset">
             {/* Name */}
           <label className="label">Name</label>
