@@ -60,6 +60,13 @@ const NavBar = () => {
           
         
         </li>
+         <li>
+          <NavLink to='/blog'  className="hover:text-blue-600">
+            Blog
+          </NavLink>
+          
+        
+        </li>
         
      
       </ul>

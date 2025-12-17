@@ -30,6 +30,7 @@ import Profile from "../Component/Dashboard/Profile/Profile";
 import UpdateProfile from "../Component/Dashboard/Profile/UpdateProfile";
 import Error from "../Component/Error/Error";
 import HomeLayout from "../Pages/HomeLayout/HomeLayout";
+import Blog from "../Component/Blog/Blog";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +43,9 @@ export const router = createBrowserRouter([
         },{
           path:'/allContests',
           Component:AllContests
+        },{
+          path:'/blog',
+          Component:Blog
         },
         {
         path:'/contestDetails/:id',
