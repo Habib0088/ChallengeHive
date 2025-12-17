@@ -147,6 +147,13 @@ const ContestDetails = () => {
           </h2>
           <p className="text-sm">{contest?.description}</p>
         </div>
+        {/* Task Instruction */}
+        <div className="bg-white/10 p-4 rounded-lg text-white/80 text-center">
+          <h2 className="font-semibold mb-2 text-center text-2xl">
+             Contest Instruction
+          </h2>
+          <p className="text-sm">{contest?.taskInstruction}</p>
+        </div>
 
         {/* Submission Box */}
         <div className="bg-white/10 p-4 rounded-lg text-white/80 relative">

@@ -159,6 +159,22 @@ const AddContest = () => {
                 </p>
               )}
             </div>
+            {/* Task Instruction */}
+            <div>
+              <label className="label font-semibold text-md text-black ">
+                Task Instruction
+              </label>
+              <textarea
+                {...register("taskInstruction", { required: true })}
+                className="input w-full h-24 resize-none"
+                placeholder="Task Instruction"
+              ></textarea>
+              {errors.description && (
+                <p className="text-red-500">
+                  You have not provided Task Instruction
+                </p>
+              )}
+            </div>
             {/* Description */}
             <div>
               <label className="label font-semibold text-md text-black ">
