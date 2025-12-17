@@ -1,16 +1,40 @@
-# React + Vite
+# Website Name:- ChallengeHive
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site:** [Insert Live URL Here]
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ChallengeHive is a modern contest management web application designed for users, contest creators, and admins. It offers a fully responsive experience on mobile, tablet, and desktop devices. Users can participate in contests, submit tasks, view winners, and track their performance, while creators can manage their contests and admins oversee the platform.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 1**Responsive Design:** Fully responsive UI for Home, Dashboard, and all pages across devices.
+- 2**Private Routes:** Users remain logged in after page refresh with secure JWT authentication.
+- 3**Environment Variables:** Firebase and MongoDB secrets are securely hidden using environment variables.
+- 4**Sweet Alerts & Toasts:** Used for login, signup, CRUD actions, and notifications.
+- 5**TanStack Query:** All data fetching is managed with TanStack Query for efficiency and caching.
+- 6**Home Page:** Includes Navbar, Banner , Popular Contests, Winner Advertisement, Road map Section, and Footer.
+- 7**Contest Management:** Admin-approved contests with detailed views, registration, payment, and task submission features.
+- 8**Role-Based Access:** Three roles - Admin, Contest Creator, and Normal User - each with specific dashboard functionalities.
+- 9**Dashboard Pages:**
+  - User: Participated Contests, Winning Contests, Profile with win percentage chart.
+  - Creator: Add/Edit contests, view submissions, declare winners.
+  - Admin: Manage Users, Manage Contests, approve/reject contests.
+-
+- 10**Pagination:** Implemented on tables (10 items per page) for better usability.
+-
+- 11**Extra Features:** Google Sign-in, React Hook Form in all forms, secure JWT-protected APIs, meaningful additional routes for extended functionality.
+- 12**404 Not Found Page:** User-friendly error page with navigation back to home.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React.js
+- Firebase Authentication
+- MongoDB & Node.js (Backend)
+- React Router DOM
+- TanStack Query
+- SweetAlert2 , Toast
+- React Hook Form
+- JWT Authentication
+- React Datepicker
+- Tailwind CSS

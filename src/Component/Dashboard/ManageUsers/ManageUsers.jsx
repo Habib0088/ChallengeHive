@@ -1,11 +1,16 @@
+
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 import Loading from "../../Loading/Loading";
 import { toast } from "../../Authentication/Registration/Toast/toast";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   const {
     refetch,
     data: users = [],
@@ -19,9 +24,7 @@ const ManageUsers = () => {
   });
 
   const handleUpdateRole = (user, status) => {
-    const userStatus = {
-      role: status,
-    };
+    const userStatus = { role: status };
     console.log(user, status);
 
     axiosSecure
@@ -36,9 +39,15 @@ const ManageUsers = () => {
   };
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
   console.log(users);
+
+  // Pagination Logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentUsers = users.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(users.length / itemsPerPage);
 
   return (
     <div>
@@ -58,10 +67,10 @@ const ManageUsers = () => {
             </tr>
           </thead>
 
-          {users.map((user, i) => (
+          {currentUsers.map((user, i) => (
             <tbody key={i}>
               <tr>
-                <td>{i + 1}</td>
+                <td>{indexOfFirstItem + i + 1}</td>
 
                 <td>
                   <div className="flex items-center gap-3">
@@ -131,6 +140,21 @@ const ManageUsers = () => {
             </tbody>
           ))}
         </table>
+      </div>
+
+
+      <div className="flex justify-center gap-2 mt-4">
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentPage(i + 1)}
+            className={`px-3 py-1 rounded ${
+              currentPage === i + 1 ? "bg-blue-500 text-white" : "bg-gray-200"
+            }`}
+          >
+            {i + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

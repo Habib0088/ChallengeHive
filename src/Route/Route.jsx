@@ -23,7 +23,7 @@ import ContestDetails from "../Component/ContestDetails/ContestDetails";
 import AllContests from "../Component/Contest/AllContests/AllContests";
 import PaymentSuccess from "../Component/Payment/PaymentSuccess/PaymentSuccess";
 import Submission from "../Component/Dashboard/Submission/Submission";
-import UserRoute from "../Route/UserRoute"
+import UserRoute from "../Route/UserRoute";
 import MyParticipatedContests from "../Component/Dashboard/MyParticipatedContests/MyParticipatedContests";
 import MyWinningContests from "../Component/Dashboard/MyWinningContests/MyWinningContests";
 import Profile from "../Component/Dashboard/Profile/Profile";
@@ -31,97 +31,189 @@ import UpdateProfile from "../Component/Dashboard/Profile/UpdateProfile";
 import Error from "../Component/Error/Error";
 import HomeLayout from "../Pages/HomeLayout/HomeLayout";
 import Blog from "../Component/Blog/Blog";
+import AboutUs from "../Component/AboutUs/AboutUs";
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component:Layout,
-    children:[
-        {
-            index:true,
-            Component:HomeLayout
-         
-        },{
-          path:'/allContests',
-          Component:AllContests
-        },{
-          path:'/blog',
-          Component:Blog
-        },
-        {
-        path:'/contestDetails/:id',
+    Component: Layout,
+    children: [
+      {
+        index: true,
+        Component: HomeLayout,
+      },
+      {
+        path: "/allContests",
+        Component: AllContests,
+      },
+      {
+        path: "/blog",
+        Component: Blog,
+      },
+      {
+        path: "/aboutUs",
+        Component: AboutUs,
+      },
+      {
+        path: "/contestDetails/:id",
         // Component:ContestDetails
-        element:<PrivateRoute><ContestDetails></ContestDetails></PrivateRoute>
-      },{
-        path:'/paymentSuccess',
-        element:<PrivateRoute><PaymentSuccess></PaymentSuccess></PrivateRoute>
-      },{
-        path:'/*',
-        Component:Error
-      }
-    ]
+        element: (
+          <PrivateRoute>
+            <ContestDetails></ContestDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/paymentSuccess",
+        element: (
+          <PrivateRoute>
+            <PaymentSuccess></PaymentSuccess>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/*",
+        Component: Error,
+      },
+    ],
   },
   {
     path: "/",
-    Component:AuthLayout,
-    children:[
+    Component: AuthLayout,
+    children: [
       {
-        path:'/registration',
-        Component:Registration
-      },{
-        path:'/login',
-        // Component:LogIn
-        Component:LogIn
-
+        path: "/registration",
+        Component: Registration,
       },
-    ]
-  },{
-    path:'/dashboard',
-    Component:DashboardLayout,
-    children:[
       {
-        index:true,
-        Component:DashboardHome
-      },{
-          path:'/dashboard/beContestCreator',
-         element:<PrivateRoute><BeContestCreator></BeContestCreator></PrivateRoute>
-        },
+        path: "/login",
+        // Component:LogIn
+        Component: LogIn,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    Component: DashboardLayout,
+    children: [
       {
-        path:'/dashboard/approveCreators',
+        index: true,
+        Component: DashboardHome,
+      },
+      {
+        path: "/dashboard/beContestCreator",
+        element: (
+          <PrivateRoute>
+            <BeContestCreator></BeContestCreator>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/approveCreators",
         // Component:ApproveCreators
-        element:<PrivateRoute><AdminRoute><ApproveCreators></ApproveCreators></AdminRoute></PrivateRoute>
-      },{
-        path:'/dashboard/manageUsers',
-        element:<PrivateRoute><AdminRoute><ManageUsers></ManageUsers></AdminRoute></PrivateRoute>
-      },{
-        path:'/dashboard/addContest',
-        element:<PrivateRoute><CreatorRoute><AddContest></AddContest></CreatorRoute></PrivateRoute>
-      },{
-        path:'/dashboard/myContestPage',
-        element:<PrivateRoute><CreatorRoute><MyContestPage></MyContestPage></CreatorRoute></PrivateRoute>
-
-      },{
-        path:'/dashboard/editContest/:id',
-        element:<PrivateRoute><CreatorRoute><EditContest></EditContest></CreatorRoute></PrivateRoute>
-      },{
-        path:'/dashboard/manageContest',
-        element:<PrivateRoute><AdminRoute><ManageContest></ManageContest></AdminRoute></PrivateRoute>
-      },{
-        path:'/dashboard/submission/:id',
-        element:<PrivateRoute><CreatorRoute><Submission></Submission></CreatorRoute></PrivateRoute>
-      },{
-        path:'/dashboard/myContest',
-        element:<PrivateRoute><UserRoute><MyParticipatedContests></MyParticipatedContests></UserRoute></PrivateRoute>
-      },{
-        path:'/dashboard/myWinningContests',
-        element:<PrivateRoute><UserRoute><MyWinningContests></MyWinningContests></UserRoute></PrivateRoute>
-      },{
-        path:"/dashboard/Profile",
-        element:<PrivateRoute><UserRoute><Profile></Profile></UserRoute></PrivateRoute>
-      },{
-        path:'/dashboard/updateProfile',
-        element:<PrivateRoute><UserRoute><UpdateProfile></UpdateProfile></UserRoute></PrivateRoute>
-      }
-    ]
-  }
- 
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ApproveCreators></ApproveCreators>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageUsers",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageUsers></ManageUsers>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/addContest",
+        element: (
+          <PrivateRoute>
+            <CreatorRoute>
+              <AddContest></AddContest>
+            </CreatorRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/myContestPage",
+        element: (
+          <PrivateRoute>
+            <CreatorRoute>
+              <MyContestPage></MyContestPage>
+            </CreatorRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/editContest/:id",
+        element: (
+          <PrivateRoute>
+            <CreatorRoute>
+              <EditContest></EditContest>
+            </CreatorRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageContest",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageContest></ManageContest>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/submission/:id",
+        element: (
+          <PrivateRoute>
+            <CreatorRoute>
+              <Submission></Submission>
+            </CreatorRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/myContest",
+        element: (
+          <PrivateRoute>
+            <UserRoute>
+              <MyParticipatedContests></MyParticipatedContests>
+            </UserRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/myWinningContests",
+        element: (
+          <PrivateRoute>
+            <UserRoute>
+              <MyWinningContests></MyWinningContests>
+            </UserRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/Profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/updateProfile",
+        element: (
+          <PrivateRoute>
+            <UpdateProfile></UpdateProfile>
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
 ]);

@@ -18,7 +18,7 @@ const WinnerAdvertisement = () => {
   }
   return (
     <div className="bg-gray-300 md:py-18">
-      <h1 className="text-6xl font-bold text-center">Last Winner</h1>
+      <h1 className="text-6xl font-bold text-center">Latest Winner</h1>
       <div className="hero  ">
         <div className="hero-content flex-col lg:flex-row-reverse text-center">
           <div className="text-start">
@@ -36,8 +36,8 @@ const WinnerAdvertisement = () => {
           </div>
 
           <div>
-            <h1 className="text-5xl font-bold flex-1 capitalize">
-              {winner?.[0]?.name}-{winner?.[0]?.contestType}
+            <h1 className="text-5xl font-bold flex-1 capitalize r">
+              {winner?.[0]?.name}-<span className="text-3xl">{winner?.[0]?.contestType}</span>
             </h1>
             <p className="py-6 font-bold">{winner?.[0]?.description}</p>
           </div>

@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="w-11/12 mx-auto pt-2 text-center md:text-start">
       <div className="container grid grid-cols-1 md:grid-cols-3 gap-3 justify-center items-center">
-        <div>
+        <div className="flex flex-col items-center justify-center">
           <img src={logo} alt="Logo" className="h-20 w-20 rounded-full border-2 " />
           <h1 className="font-bold">ChallengeHive</h1>
         </div>

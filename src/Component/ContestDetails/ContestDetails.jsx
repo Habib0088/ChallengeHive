@@ -173,7 +173,7 @@ const ContestDetails = () => {
             <>
               <button
                 onClick={handleSubmit(handleSendTaskInfo)}
-                className="mt-2 block bg-primary text-black w-[400px] mx-auto text-center  hover:bg-purple-700  font-bold px-4 py-2 rounded-md"
+                className="mt-2 block bg-primary text-black w-7/12 mx-auto text-center  hover:bg-purple-700  font-bold px-4 py-2 rounded-md"
               >
                 Submit
               </button>

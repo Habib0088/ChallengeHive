@@ -16,7 +16,7 @@ const PopularContest = () => {
     
   return (
     <div className="md:py-16  mx-auto bg-blue-300 ">
-        
+        <h1 className="text-center font-bold text-6xl pb-4">Popular Contests</h1>
        <div className=" w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
          {
             contests.map(contest=> <div className="card bg-sky-100 shadow-sm hover:scale-[1.02] transition duration-500">
