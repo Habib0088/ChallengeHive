@@ -7,7 +7,7 @@ import Loading from "../../Loading/Loading";
 
 const ApproveCreators = () => {
   const axiosSecure = useAxiosSecure();
-  // এটা Database থেকে Data এনেছে Admin দারা approve বা reject করার জন্য
+
   const {refetch,isLoading,data: creators = [] } = useQuery({
     queryKey: ["approveCreators"],
     queryFn: async () => {
@@ -16,7 +16,7 @@ const ApproveCreators = () => {
     },
   });
   console.log(creators);
-  // এটা দিয়ে creators এর status update করা হবে
+
   const handleUpdateStatus = (creator, status) => {
     const info = {
       email:creator.email,

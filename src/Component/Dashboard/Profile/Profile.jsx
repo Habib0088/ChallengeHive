@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 import { Link } from "react-router";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import Loading from "../../Loading/Loading";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -16,7 +17,7 @@ const Profile = () => {
     },
   });
 
-  const { data: count } = useQuery({
+  const { isLoading,data: count } = useQuery({
     queryKey: ["countWinning", user?.email],
     queryFn: async () => {
       const res = await axiosSecure(`/user/stats?email=${user?.email}`);
@@ -30,7 +31,9 @@ const Profile = () => {
   ];
 
   const COLORS = ["#2563eb", "#16a34a"];
-
+if(isLoading){
+  return <Loading></Loading>
+}
   return (
     <div className="p-4">
       <div className="max-w-8/12 mx-auto space-y-3 text-center rounded-md p-4 shadow-2xl bg-gray-200">

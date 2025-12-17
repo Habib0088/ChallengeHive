@@ -1,102 +1,4 @@
-// import React from "react";
-// import { Link, NavLink } from "react-router";
-// import logo from "../../../assets/ChallengeHive.png";
-// import AuthProvider from "../../../Component/Context/AuthProvider/AuthProvider";
-// import useAuth from "../../../hook/useAuth";
-// import "./nav.css";
-// import { useQuery } from "@tanstack/react-query";
-// import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 
-// const NavBar = () => {
-//   const axiosSecure = useAxiosSecure();
-
-//   // const {user}=AuthProvider()
-//   const { user, logOut } = useAuth();
-//   const { data: userProfile } = useQuery({
-//     queryKey: ["users", user?.email],
-//     queryFn: async () => {
-//       const res = await axiosSecure.get(`/users/profile?email=${user.email}`);
-//       return res.data;
-//     },
-//   });
-//   const handleLogout = () => {
-//     logOut()
-//       .then(() => console.log("Logged out"))
-//       .catch((err) => console.log(err));
-//   };
-
-//   return (
-//     <nav className="w-full bg-blue-200 shadow px-6 py-3 flex items-center justify-between">
-//       {/* Left*/}
-//       <Link to="/">
-//         <div className="flex items-center space-x-2">
-//           <img src={logo} alt="Logo" className="h-20 w-20 rounded-md" />
-//         </div>
-//       </Link>
-
-//       {/* Middle:- Menu */}
-//       <ul className="hidden md:flex space-x-3 text-gray-700 font-medium">
-//         <li>
-//           <NavLink to="/" className="hover:text-blue-600">
-//             Home
-//           </NavLink>
-//         </li>
-//         <li></li>
-
-//         <li>
-//           <NavLink to="/allContests" className="hover:text-blue-600">
-//             All Contests
-//           </NavLink>
-//         </li>
-//         <li>
-//           <NavLink to="/blog" className="hover:text-blue-600">
-//             Blog
-//           </NavLink>
-//         </li>
-//         <li>
-//           <NavLink to="/aboutUs" className="hover:text-blue-600">
-//             About Us
-//           </NavLink>
-//         </li>
-//       </ul>
-
-//       {/* Right: Dropdown */}
-
-//       {user ? (
-//         <div className="relative group z-50">
-//           <img
-//             src={userProfile?.photoURL}
-//             className="h-15 w-15 rounded-full"
-//             referrerPolicy="no-referrer"
-//             alt=""
-//           />
-
-//           <div className="absolute right-0  w-40 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition">
-//             <Link to='/dashboard/profile'><li  className="block px-4 py-2 hover:bg-gray-100">
-//               {userProfile?.displayName}
-//             </li></Link>
-//             <Link to="/dashboard" className="block px-4 py-2 hover:bg-gray-100">
-//               Dashboard
-//             </Link>
-//             <a
-//               onClick={handleLogout}
-//               href="#"
-//               className="block px-4 py-2 hover:bg-gray-100"
-//             >
-//               Logout
-//             </a>
-//           </div>
-//         </div>
-//       ) : (
-//         <Link to={"/login"}>
-//           <div className="bg-blue-500 text-white btn">LogIn</div>
-//         </Link>
-//       )}
-//     </nav>
-//   );
-// };
-
-// export default NavBar;
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router";
 import logo from "../../../assets/ChallengeHive.png";
@@ -104,13 +6,14 @@ import useAuth from "../../../hook/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 import "./nav.css";
+import Loading from "../../../Component/Loading/Loading";
 
 const NavBar = () => {
   const axiosSecure = useAxiosSecure();
   const { user, logOut } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const { data: userProfile } = useQuery({
+  const { isLoading,data: userProfile } = useQuery({
     queryKey: ["users", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users/profile?email=${user.email}`);
@@ -123,7 +26,9 @@ const NavBar = () => {
       .then(() => console.log("Logged out"))
       .catch((err) => console.log(err));
   };
-
+if(isLoading){
+  return <Loading></Loading>
+}
   return (
     <nav className="w-full bg-blue-200 shadow px-6 py-3 flex items-center justify-between relative">
       {/* Left */}

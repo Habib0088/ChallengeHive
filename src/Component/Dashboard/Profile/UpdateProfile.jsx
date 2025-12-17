@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "../../Authentication/Registration/Toast/toast";
+import Loading from "../../Loading/Loading";
 
 const UpdateProfile = () => {
   const { user } = useAuth();
@@ -59,7 +60,9 @@ const UpdateProfile = () => {
 
   
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return <Loading></Loading>
+  }
 
   return (
     <div className="p-4">

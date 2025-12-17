@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 import { toast } from "../../Authentication/Registration/Toast/toast";
 import Countdown from "../../Countdown/Countdown";
+import Loading from "../../Loading/Loading";
 
 const Submission = () => {
   const axiosSecure = useAxiosSecure();
@@ -20,7 +21,7 @@ const Submission = () => {
       })
       .catch((err) => console.log(err.message));
   };
-  const { refetch, data: submissions = [] } = useQuery({
+  const { isLoading,refetch, data: submissions = [] } = useQuery({
     queryKey: ["submission", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/submission/${id}`);
@@ -28,7 +29,9 @@ const Submission = () => {
     },
   });
   //   console.log(submissions);
-
+if(isLoading){
+  return <Loading></Loading>
+}
   return (
     <div>
       <div>

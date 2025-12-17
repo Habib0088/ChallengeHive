@@ -69,7 +69,9 @@ const EditContest = () => {
       .catch((err) => console.log(err));
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading) {
+    return <Loading></Loading>
+  }
 
   return (
     <div>

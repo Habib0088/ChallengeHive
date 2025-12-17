@@ -61,7 +61,7 @@ const ManageUsers = () => {
             <tr>
               <td>#</td>
               <th>Name</th>
-              <th>Job</th>
+              <th>Email</th>
               <th>Role</th>
               <th>Action</th>
             </tr>

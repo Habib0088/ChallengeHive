@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../../hook/useAxiosSecure/useAxiosSecure";
 import { Link } from "react-router";
+import Loading from "../../../Component/Loading/Loading";
 
 const PopularContest = () => {
     const axiosSecure=useAxiosSecure()
-    const {data:contests=[]}=useQuery({
+    const {isLoading,data:contests=[]}=useQuery({
         queryKey:['popularContests'],
         queryFn:async()=>{
             const res=await axiosSecure('/contestsPopular')
@@ -13,7 +14,9 @@ const PopularContest = () => {
         }
     })
     console.log(contests);
-    
+    if(isLoading){
+      return <Loading></Loading>
+    }
   return (
     <div className="md:py-16  mx-auto bg-blue-300 ">
         <h1 className="text-center font-bold text-6xl pb-4">Popular Contests</h1>
@@ -29,7 +32,7 @@ const PopularContest = () => {
         </figure>
         <div className="card-body ">
           <h2 className="card-title font-bold">{contest?.name}</h2>
-          <h2>Participated: {contest?.participants.length}</h2>
+          <h2>Participants: {contest?.participants.length}</h2>
           <p>
            {contest?.description.slice(0,100)}{contest?.description.length>100?'...' :'' }
           </p>
