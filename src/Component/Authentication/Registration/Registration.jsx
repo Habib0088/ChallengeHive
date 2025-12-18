@@ -75,7 +75,7 @@ const Registration = () => {
           };
           // Create user to the database
           axiosSecure
-            .post("http://localhost:3000/users", userProfileCreate)
+            .post("https://challengehive-smoky.vercel.app/users", userProfileCreate)
             .then((res) => {
               if (res.data.insertedId) {
                 toast("Logged In successfully")

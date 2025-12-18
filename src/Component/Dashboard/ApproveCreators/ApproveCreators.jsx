@@ -11,7 +11,7 @@ const ApproveCreators = () => {
   const {refetch,isLoading,data: creators = [] } = useQuery({
     queryKey: ["approveCreators"],
     queryFn: async () => {
-      const res = await axiosSecure.get("http://localhost:3000/creators");
+      const res = await axiosSecure.get("https://challengehive-smoky.vercel.app/creators");
       return res.data;
     },
   });

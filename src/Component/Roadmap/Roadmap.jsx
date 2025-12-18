@@ -12,7 +12,7 @@ const Roadmap = () => {
   return (
    <div className="bg-blue-300">
      <div className="md:py-11 w-11/12 mx-auto overflow-hidden ">
-      <h1 className="text-6xl font-bold text-center mb-10">How We Works</h1>
+      <h1 className="text-6xl font-bold text-center mb-10">How We Work</h1>
 
       <motion.div
         className="flex gap-4"

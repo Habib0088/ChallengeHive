@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 // Create Axios instance
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://challengehive-smoky.vercel.app",
 });
 
 const useAxiosSecure = () => {
