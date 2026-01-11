@@ -1,18 +1,28 @@
-import React from 'react';
-import Home from '../Home/Home';
-import Banner from './Banner/Banner';
 import PopularContest from './PopularContest/PopularContest';
 import WinnerAdvertisement from './WinnerAdvertisement/WinnerAdvertisement';
-import Animate from '../../Component/Animate/Animate';
 import Roadmap from '../../Component/Roadmap/Roadmap';
+import Carousel from '../../Component/Carousel';
+import ScrollAnimateWrapper from '../../Component/ScrollAnimateWrapper/ScrollAnimateWrapper';
+import '../../styles/theme-variables.css';
+
 const HomeLayout = () => {
     return (
-        <div >
-           {/* <Home></Home> */}
-           <Banner></Banner>
-           <PopularContest></PopularContest>
-           <WinnerAdvertisement></WinnerAdvertisement>
-           <Roadmap></Roadmap>
+        <div className="min-h-screen" style={{ background: 'var(--bg-primary)' }}>
+           <ScrollAnimateWrapper animation="fade-in" delay={0}>
+               <Carousel />
+           </ScrollAnimateWrapper>
+           
+           <ScrollAnimateWrapper animation="fade-in-up" delay={100}>
+               <PopularContest />
+           </ScrollAnimateWrapper>
+           
+           <ScrollAnimateWrapper animation="slide-in-left" delay={200}>
+               <WinnerAdvertisement />
+           </ScrollAnimateWrapper>
+           
+           <ScrollAnimateWrapper animation="scale-in-center" delay={300}>
+               <Roadmap />
+           </ScrollAnimateWrapper>
         </div>
     );
 };

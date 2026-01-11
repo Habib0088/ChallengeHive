@@ -1,0 +1,107 @@
+/* Theme Toggle Button Styles */
+
+.theme-toggle-btn {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* Icon Animations */
+.sun-icon,
+.moon-icon {
+  transform-origin: center;
+}
+
+/* Ripple Effect */
+.theme-toggle-ripple {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+  transform: scale(0);
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+.theme-toggle-btn:active .theme-toggle-ripple {
+  transform: scale(4);
+  opacity: 1;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* Hover Glow Effect */
+.theme-toggle-btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.theme-toggle-btn:hover::before {
+  opacity: 0.3;
+}
+
+/* Focus Ring */
+.theme-toggle-btn:focus {
+  outline: none;
+}
+
+.theme-toggle-btn:focus-visible {
+  ring: 2px;
+  ring-color: rgba(59, 130, 246, 0.5);
+  ring-offset: 2px;
+}
+
+/* Smooth Theme Transition */
+.theme-toggle-btn * {
+  transition: all 0.3s ease;
+}
+
+/* Animation Keyframes */
+@keyframes rotate-in {
+  from {
+    transform: rotate(-90deg) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate-out {
+  from {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: rotate(90deg) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-btn,
+  .theme-toggle-btn *,
+  .theme-toggle-ripple {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .theme-toggle-btn {
+    border-width: 3px;
+  }
+}
