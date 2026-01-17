@@ -12,6 +12,7 @@ const LogIn = () => {
   const { isDark } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showCredentialsModal, setShowCredentialsModal] = useState(false);
   
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
@@ -46,6 +47,7 @@ const LogIn = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -64,6 +66,38 @@ const LogIn = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const testCredentials = [
+    {
+      role: "Admin",
+      email: "admin@gmail.com",
+      password: "admin@gmail.com",
+      description: "Full access to all admin features",
+      color: "from-red-500 to-pink-600"
+    },
+    {
+      role: "Creator",
+      email: "creator@gmial.com",
+      password: "creator@gmial.com",
+      description: "Can create and manage contests",
+      color: "from-green-500 to-emerald-600"
+    },
+    {
+      role: "User",
+      email: "user6@gmail.com",
+      password: "user6@gmail.com",
+      description: "Can participate in contests",
+      color: "from-blue-500 to-cyan-600"
+    }
+  ];
+
+  const fillCredentials = (email, password) => {
+    // Using setValue from react-hook-form to properly update form state
+    setValue('email', email);
+    setValue('password', password);
+    setShowCredentialsModal(false);
+    toast("Credentials filled! You can now login.", "info");
   };
 
   if (loading) {
@@ -270,8 +304,120 @@ const LogIn = () => {
                 </Link>
               </p>
             </div>
+
+            {/* Test Credentials Button */}
+            <div className="mt-6 text-center">
+              <button
+                type="button"
+                onClick={() => setShowCredentialsModal(true)}
+                className={`inline-flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                  isDark 
+                    ? 'bg-yellow-600/20 text-yellow-400 border border-yellow-600/30 hover:bg-yellow-600/30' 
+                    : 'bg-yellow-50 text-yellow-700 border border-yellow-200 hover:bg-yellow-100'
+                }`}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                </svg>
+                <span>Test Credentials</span>
+              </button>
+            </div>
           </div>
         </ScrollAnimateWrapper>
+
+        {/* Test Credentials Modal */}
+        {showCredentialsModal && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+            <div className={`max-w-md w-full rounded-2xl p-6 shadow-2xl border transition-all duration-300 ${
+              isDark 
+                ? 'bg-slate-800 border-gray-700' 
+                : 'bg-white border-gray-200'
+            }`}>
+              {/* Modal Header */}
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                    Test Credentials
+                  </h3>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                    Click on any credential to auto-fill the login form
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowCredentialsModal(false)}
+                  className={`p-2 rounded-lg transition-colors duration-200 ${
+                    isDark 
+                      ? 'hover:bg-gray-700 text-gray-400 hover:text-white' 
+                      : 'hover:bg-gray-100 text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Credentials List */}
+              <div className="space-y-3">
+                {testCredentials.map((credential, index) => (
+                  <button
+                    key={index}
+                    onClick={() => fillCredentials(credential.email, credential.password)}
+                    className={`w-full p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 hover:shadow-lg text-left ${
+                      isDark 
+                        ? 'border-gray-600 bg-slate-700/50 hover:border-blue-500' 
+                        : 'border-gray-200 bg-gray-50 hover:border-blue-300'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${credential.color} flex items-center justify-center shadow-md`}>
+                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center space-x-2">
+                          <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>
+                            {credential.role}
+                          </h4>
+                          <span className={`px-2 py-1 text-xs rounded-full bg-gradient-to-r ${credential.color} text-white`}>
+                            Test Account
+                          </span>
+                        </div>
+                        <p className="text-sm truncate" style={{ color: 'var(--text-secondary)' }}>
+                          {credential.email}
+                        </p>
+                        <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                          {credential.description}
+                        </p>
+                      </div>
+                      <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--text-tertiary)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+              {/* Modal Footer */}
+              <div className="mt-6 p-4 rounded-lg" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+                <div className="flex items-start space-x-2">
+                  <svg className="w-5 h-5 text-yellow-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                  </svg>
+                  <div>
+                    <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
+                      For Testing Only
+                    </p>
+                    <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                      These credentials are for demonstration purposes. In production, use your own secure credentials.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Footer */}
         <ScrollAnimateWrapper animation="fade-in-up" delay={400}>
