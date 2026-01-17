@@ -38,3 +38,17 @@ ChallengeHive is a modern contest management web application designed for users,
 - JWT Authentication
 - React Datepicker
 - Tailwind CSS
+- 
+=>Steps to Run Locally:
+
+1.Clone the repo:
+2.Install dependencies:
+
+3.Set up environment variables:
+Create a .env file with your Firebase config.
+
+Start the app:
+npm start
+Open in browser:
+http://localhost:3000
+<img width="1366" height="601" alt="ChallangeHive" src="https://github.com/user-attachments/assets/c89541b8-0e24-4ed6-8eed-1ec4aba1e835" />
